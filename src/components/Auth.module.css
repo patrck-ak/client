@@ -1,0 +1,59 @@
+*{
+  outline: none;
+  border: none;
+  transition: .2s ease-in-out;
+  -webkit-transition: .2s ease-in-out;
+  -moz-transition: .2s ease-in-out;
+  -ms-transition: .2s ease-in-out;
+  -o-transition: .2s ease-in-out;
+}
+
+.form {
+  padding-top: 150px;
+  width: 45vw;
+  text-align: center;
+}
+
+
+.input {
+  text-align: center;
+  width: 60px;
+  margin: 10px;
+  padding: 5px;
+  border: #202020 2px solid;
+  background: #f2f2f2;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+} .input:active, .input:focus, .input:focus::after{
+  width: 100px;
+  border: #77ec6c 2px solid;
+}
+
+.btn {
+  margin-top: 25px;
+  width: 70px;
+  padding: 5px;
+  background: #fdfdfd;
+  color: #353535;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+} .btn:hover, .btn:focus {
+  transform: scale(1.03);
+  background: #77ec6c;
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+} .btn:active {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}

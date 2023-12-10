@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-unused-vars */
+import React, {useEffect, useState} from 'react'
+import {createBrowserRouter, RouteProvider, Route} from 'react-router-dom'
+import Auth from './components/Auth'
+import WebApp from './components/WebApp'
+import Home from './routes/Home'
+import NewUser from './routes/NewUser'
 
-function App() {
+
+export default function App() {
+
+  const router = createBrowserRouter([{
+    element: <App />,
+    children: [
+      {
+        path: "/",
+      },
+      {
+        path: "/new",
+      },
+    ],
+  },
+])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Auth />
     </div>
-  );
+     
+  )
 }
-
-export default App;
