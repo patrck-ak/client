@@ -1,8 +1,22 @@
 .navlist {
   list-style: none;
   display: flex;
+  background: #1f1f1f;
+  padding: 10px;
+  -webkit-box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.39);
+  -moz-box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.39);
+  box-shadow: 0px 10px 22px -4px rgba(0,0,0,0.39);
+}
+
+.navthemeselect {
+  left: 70vw;
 }
 
 .navitem {
   margin-left: 3em;
+} a {
+  color: aliceblue;
+  text-decoration: none;
+} a:hover {
+  color: aquamarine;
 }

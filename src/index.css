@@ -1,13 +1,17 @@
-* {
-  outline: none;
-  user-select: none;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Armata&display=swap');
 
+* {
+  font-family: 'Armata', sans-serif;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  outline: none;
+  border: none;
 }
 
 body {
-  background: #202020;
+  background: rgb(201, 201, 201);
+  background: linear-gradient(270deg, rgb(198, 235, 250) 0%, rgb(253, 253, 253) 100%);
   color: aliceblue;
-  display: flex;
-  justify-content: center;
 }

@@ -1,11 +1,16 @@
 import React from 'react'
+import Style from './Navbar.module.css'
+import { FaHome, FaRegListAlt, FaUserPlus } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 function Navbar() {
+
   return (
     <>
-    <ul className=''>
-      <li className=''><a href="/">Home</a></li>
-      <li className=''><a href="/new">Novo paciente</a></li>
+    <ul className={Style.navlist}>
+      <li className={Style.navitem}> <Link to={'/'}> <FaHome/> Inicio</Link> </li>
+      <li className={Style.navitem}> <Link to={'/new'}> <FaUserPlus/> Novo Paciente</Link> </li>
+      <li className={Style.navitem}> <Link to={'/list'}> <FaRegListAlt/> Listar Pacientes</Link> </li>
     </ul>
     </>
   )
