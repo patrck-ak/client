@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouteProvider, Route, RouterProvider} from 'react-router-dom'
 import Home from './routes/Home'
 import NewUser from './routes/NewUser';
+import ListPacients from './routes/ListPacients';
 
 
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([{
     {
       path: "/new",
       element: <NewUser />,
+    },
+    {
+      path: "/list",
+      element: <ListPacients />,
     },
   ],
 },
