@@ -5,7 +5,7 @@ function Navbar() {
     <>
     <ul className=''>
       <li className=''><a href="/">Home</a></li>
-      <li className=''><a href="/new"></a></li>
+      <li className=''><a href="/new">Novo paciente</a></li>
     </ul>
     </>
   )
