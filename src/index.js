@@ -8,6 +8,7 @@ import {createBrowserRouter, RouteProvider, Route, RouterProvider} from 'react-r
 import Home from './routes/Home'
 import NewUser from './routes/NewUser';
 import ListPacients from './routes/ListPacients';
+import AuthUser from './components/AuthUser';
 
 
 
@@ -16,7 +17,11 @@ const router = createBrowserRouter([{
   children: [
     {
       path: "/",
-      element: <Home />,
+      element: <AuthUser />,
+    },
+    {
+      path: "/home",
+      element: <Home />
     },
     {
       path: "/new",
