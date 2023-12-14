@@ -8,8 +8,10 @@
 }
 
 .wrap {
-  display: flex; 
+  margin-top: 9rem;
+  display: flex;
   justify-content: center;
+
 }
 
 
@@ -19,7 +21,6 @@
 }
 
 .formContainer {
-  margin-top: 2rem;
   width: 350px;
   height: 350px;
   border-radius: 15px;
@@ -28,9 +29,9 @@
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
   background: #202020;
-  -webkit-box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.69);
-  -moz-box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.69);
-  box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.69);
+  -webkit-box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.39);
+  box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.39);
 }
 
 .inputUser,
@@ -44,6 +45,11 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+
+.position {
+  position: relative;
+  left: 10px;
 }
 
 .inputUser {

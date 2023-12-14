@@ -26,11 +26,11 @@ function AuthUser() {
     }
   };
 
+  var err = ' '
+
   return (
-    <div className={Style.wrap}>
-      <div>
-        <InfoBox msg="ado ado leu pq eh viado" />
-        <br />
+    <div>
+        <div className={Style.wrap}>
         <form className={Style.formContainer}>
           <img src="https://i.imgur.com/OPml1m4.png" alt="logo" className={Style.logoImg}/>
           <br />
@@ -40,7 +40,8 @@ function AuthUser() {
           <br />
           <button onClick={authUser} className={Style.btn} type="submit"> Entrar </button>
         </form>
-      </div>
+        </div>
+      <InfoBox msg={err} />
     </div>
   );
 }
