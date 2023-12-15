@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import Style from "./css/AuthUser.module.css";
@@ -7,41 +6,76 @@ import InfoBox from "./InfoBox";
 function AuthUser() {
   const urlBase = "http://localhost:5000/auth/user";
 
-  const [name, setName] = useState();
-  const [pass, setPass] = useState();
+  const [nameInput, setName] = useState();
+  const [passInput, setPass] = useState();
+  const [data, setData] = useState();
+
+  // variavel para utilização do infobox
+  var erroMsg = " ";
 
   const authUser = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // cancela o envio padrão
+    //* tenta enviar um post pelo axios
     try {
       axios
-        .post(urlBase, { name: name, pass: pass })
+        .post(urlBase, { name: nameInput, pass: passInput })
         .then((res) => {
-          console.log(typeof res.data);
+          setData(res.data);
+
+          //! verifica se retornou uma mensagem de erro.
+          if (data.erroMsg) {
+            console.log(data.erroMsg)
+
+          //* verifica se foi logado
+          if (data.msg === "logado") {
+            console.log(data.msg);
+          }
+          }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          //! envia um post de log de erro
+          console.log(err);
         });
     } catch (err) {
       console.log(err);
     }
   };
 
-  var err = ' '
-
   return (
     <div>
-        <div className={Style.wrap}>
+      <div className={Style.wrap}>
         <form className={Style.formContainer}>
-          <img src="https://i.imgur.com/OPml1m4.png" alt="logo" className={Style.logoImg}/>
+          <img
+            src="https://i.imgur.com/OPml1m4.png"
+            alt="logo"
+            className={Style.logoImg}
+          />
           <br />
-          <input type="text" onChange={(e) => setName(e.target.value)} className={Style.inputUser} name="userID" placeholder="ID" id="userID" />
+          <input
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            className={Style.inputUser}
+            name="userID"
+            placeholder="ID"
+            id="userID"
+          />
           <br />
-          <input type="password" onChange={(e) => setPass(e.target.value)} className={Style.inputPass} name="pass" placeholder="Senha" id="pass" />
+          <input
+            type="password"
+            onChange={(e) => setPass(e.target.value)}
+            className={Style.inputPass}
+            name="pass"
+            placeholder="Senha"
+            id="pass"
+          />
           <br />
-          <button onClick={authUser} className={Style.btn} type="submit"> Entrar </button>
+          <button onClick={authUser} className={Style.btn} type="submit">
+            {" "}
+            Entrar{" "}
+          </button>
         </form>
-        </div>
-      <InfoBox msg={err} />
+        <InfoBox msg={erroMsg} />
+      </div>
     </div>
   );
 }

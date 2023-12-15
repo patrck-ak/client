@@ -7,7 +7,7 @@ function NewUser() {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/newuser"
+        "http://localhost:5000/newpacient"
       )
       console.log(response)
     } catch (err) {

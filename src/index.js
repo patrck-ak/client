@@ -6,9 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouteProvider, Route, RouterProvider} from 'react-router-dom'
 import Home from './routes/Home'
-import NewUser from './routes/NewUser';
+import NewPacient from './routes/NewPacient';
 import ListPacients from './routes/ListPacients';
 import AuthUser from './components/AuthUser';
+import NewUser from './routes/NewPacient';
 
 
 
@@ -25,11 +26,15 @@ const router = createBrowserRouter([{
     },
     {
       path: "/new",
-      element: <NewUser />,
+      element: <NewPacient />,
     },
     {
       path: "/list",
       element: <ListPacients />,
+    },
+    {
+      path: "/newuser",
+      element: <NewUser />,
     },
   ],
 },
