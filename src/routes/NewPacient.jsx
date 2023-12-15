@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import Style from "./css/NewUser.module.css";
+import Style from "./css/NewPacient.module.css";
 import axios from 'axios';
 
 function NewUser() {

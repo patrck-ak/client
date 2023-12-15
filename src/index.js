@@ -9,7 +9,7 @@ import Home from './routes/Home'
 import NewPacient from './routes/NewPacient';
 import ListPacients from './routes/ListPacients';
 import AuthUser from './components/AuthUser';
-import NewUser from './routes/NewPacient';
+import NewUser from './routes/NewUser';
 
 
 
@@ -17,7 +17,7 @@ const router = createBrowserRouter([{
   element: <App />,
   children: [
     {
-      path: "/",
+      path: "/", 
       element: <AuthUser />,
     },
     {
@@ -25,15 +25,15 @@ const router = createBrowserRouter([{
       element: <Home />
     },
     {
-      path: "/new",
+      path: "/pacients/new",
       element: <NewPacient />,
     },
     {
-      path: "/list",
+      path: "/pacients/list",
       element: <ListPacients />,
     },
     {
-      path: "/newuser",
+      path: "/user/register",
       element: <NewUser />,
     },
   ],
