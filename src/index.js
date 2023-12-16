@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createBrowserRouter, RouteProvider, Route, RouterProvider} from 'react-router-dom'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from './routes/Home'
 import NewPacient from './routes/NewPacient';
 import ListPacients from './routes/ListPacients';
 import AuthUser from './components/AuthUser';
 import NewUser from './routes/NewUser';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap'
 
 
 
