@@ -1,7 +1,17 @@
 body {
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .wrap {
-  width: 300px;
+  background: #202020;
+  margin-top: 10em;
+  width: 400px;
+  padding: 3em;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
