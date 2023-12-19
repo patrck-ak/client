@@ -19,18 +19,15 @@ function AuthUser() {
     try {
       axios
         .post(urlBase, { name: nameInput, pass: passInput })
-        .then((res) => {
-          setData(res.data);
-
-          //! verifica se retornou uma mensagem de erro.
-          if (data.erroMsg) {
-            console.log(data.erroMsg)
-
+        .then(async (response) => {
+          await setData(response.data);
           //* verifica se foi logado
-          if (data.msg === "logado") {
-            console.log(data.msg);
+          if (response.status === 200) {
+            // 
+          } else if (response.status === 400) {
+            erroMsg = data.msg
           }
-          }
+
         })
         .catch((err) => {
           //! envia um post de log de erro
@@ -74,7 +71,7 @@ function AuthUser() {
             Entrar{" "}
           </button>
         </form>
-        <InfoBox msg={erroMsg} />
+        
       </div>
     </div>
   );
