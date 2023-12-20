@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./css/NewUser.module.css";
-// import CheckAuth from "../components/CheckAuth";
+import CheckAuth from "../components/CheckAuth";
 import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 function NewUser() {
-  // CheckAuth()
+  <CheckAuth />
 
   var [level, setLevel] = useState(0);
   const [name, setName] = useState();

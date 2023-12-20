@@ -1,22 +1,24 @@
 import axios from "axios";
 
 async function CheckAuth() {
-  sessionStorage.setItem('access-ID', '656d38c50c64b4aaf2bae794')
-  sessionStorage.setItem('access-token', 'token123456')
+
+  const baseUrl = 'http://localhost:5000/validation'
 
   const token = sessionStorage.getItem("access-token");
-  const userID = sessionStorage.getItem("access-ID");
+  const userID = sessionStorage.getItem("access-uid");
 
   axios
-  .post('http://localhost:5000/validation', 
-  { tk: token, id: userID})
+  .post(baseUrl, 
+  { tk: token, id: userID}
+  )
   .then((response) => {
-    if (response.data === true) {
-      return true
+    if(response === false) {
+      window.location.href = '/'
+      console.log(response)
     } else {
-      return false
+      console.log(response)
     }
-  })
+  }) 
   .catch((err) => {
     console.log(err);
   });
