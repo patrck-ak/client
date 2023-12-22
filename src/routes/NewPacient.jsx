@@ -2,23 +2,10 @@
 import { useEffect, useState } from "react";
 import Style from "./css/NewPacient.module.css";
 import axios from 'axios';
+import CheckAuth from "../components/CheckAuth";
 
-function NewUser() {
-  const getUser = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/newpacient"
-      )
-      console.log(response)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
+function NewPacient() {
+  CheckAuth()
   // const [name, setName] = useState();
   // const [email, setEmail] = useState();
   // const [addr, setAddr] = useState();
@@ -74,4 +61,4 @@ function NewUser() {
   );
 }
 
-export default NewUser;
+export default NewPacient;

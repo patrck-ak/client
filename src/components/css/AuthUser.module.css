@@ -4,10 +4,15 @@
   -moz-transition: 0.2s ease-in-out;
   -ms-transition: 0.2s ease-in-out;
   -o-transition: 0.2s ease-in-out;
-  text-align: center;
+}
+
+.position {
+  position: absolute;
+  left: 0;
 }
 
 .wrap {
+  text-align: center;
   margin-top: 9rem;
   display: flex;
   justify-content: center;

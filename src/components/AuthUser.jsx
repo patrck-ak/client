@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Style from "./css/AuthUser.module.css";
-import InfoBox from "./InfoBox";
+import Notification from './Notification'
 
 function AuthUser() {
   const urlBase = "http://localhost:5000/auth/user";
@@ -9,7 +9,7 @@ function AuthUser() {
   const [nameInput, setName] = useState();
   const [passInput, setPass] = useState();
   const [data, setData] = useState([]);
-  const [erro, setErro] = useState(" ");
+  var [erro, setErro] = useState(" ")
 
   const authUser = (e) => {
     e.preventDefault(); // cancela o envio padrão
@@ -17,22 +17,22 @@ function AuthUser() {
     try {
       axios
         .post(urlBase, { name: nameInput, pass: passInput })
-        .then(async (res) => {
+        .then((res) => {
           setData(res.data);
 
           //* verifica se foi logado
           switch (data.status) {
             case 1:
-              await setErro(data.err);
+              setErro(data.err);
               break;
             case 2:
-              await setErro(data.err);
+              setErro(data.err);
               break;
             case 3:
-              await setErro(data.err);
+              setErro(data.err);
               break;
             case 4:
-              await setErro(data.err);
+              setErro(data.err);
               break;
             case 5:
               //* recupera dados da api e salva no sessionStorage do navegador.
@@ -41,11 +41,10 @@ function AuthUser() {
               console.log(`usuário ${data.name} logado \n token: ${data.token} \nUserID: ${data.id}` )
               //* redireciona para home do app
               window.location.href = '/user/register'
-              
               break;
 
             default:
-              console.log("Erro Interno.");
+              console.log('erro interno.')
           }
         })
         .catch((err) => {
@@ -59,6 +58,9 @@ function AuthUser() {
 
   return (
     <div>
+
+      <Notification msg={erro} />
+
       <div className={Style.wrap}>
         <form className={Style.formContainer}>
           <img
@@ -89,7 +91,6 @@ function AuthUser() {
             Entrar
           </button>
         </form>
-        <InfoBox msg={erro} />
       </div>
     </div>
   );
