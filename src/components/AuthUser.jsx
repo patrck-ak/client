@@ -11,7 +11,7 @@ function AuthUser() {
   const [data, setData] = useState([]);
   const [erro, setErro] = useState(" ");
 
-  const authUser = async (e) => {
+  const authUser = (e) => {
     e.preventDefault(); // cancela o envio padrão
     //* tenta enviar um post pelo axios
     try {
@@ -41,7 +41,7 @@ function AuthUser() {
               console.log(`usuário ${data.name} logado \n token: ${data.token} \nUserID: ${data.id}` )
               //* redireciona para home do app
               window.location.href = '/user/register'
-
+              
               break;
 
             default:

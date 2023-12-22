@@ -1,20 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Style from "./css/NewUser.module.css";
-import CheckAuth from "../components/CheckAuth";
 import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import CheckAuth from "../components/CheckAuth";
 
 function NewUser() {
-  <CheckAuth />
+  // useEffect(() => {
+  //   var CA = CheckAuth()
+  //   console.log(CA)
+  // }, [1])
+
 
   var [level, setLevel] = useState(0);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
   const [confirm, setConfirm] = useState();
-  const [response, setResponse] = useState();
 
   const urlBase = "http://localhost:5000/user/new/admin";
   const regUser = (e) => {
@@ -23,7 +27,7 @@ function NewUser() {
       axios
         .post(urlBase, { name: name, email: email, pass: pass, level: level })
         .then(async (res) => {
-          console.log(res)
+          console.log(res);
         }) //! finalizar sistema de envio de log
         .catch((err) => {
           console.log(err);
@@ -38,7 +42,7 @@ function NewUser() {
     <>
       <div className={Style.wrap}>
         <form className={Style.form}>
-          <h4 className="text-light" >Registrar novo usuário</h4>
+          <h4 className="text-light">Registrar novo usuário</h4>
 
           <div className="input-group mb-2 mt-4">
             <span className="input-group-text" id="basic-addon1">
@@ -54,7 +58,7 @@ function NewUser() {
 
           <div className="input-group mb-2">
             <span className="input-group-text" id="basic-addon1">
-            <MdEmail />
+              <MdEmail />
             </span>
             <input
               type="text"
@@ -112,7 +116,7 @@ function NewUser() {
             Cadastrar
           </button>
         </form>
-      </div>{" wrapper "}
+      </div>
     </>
   );
 }
