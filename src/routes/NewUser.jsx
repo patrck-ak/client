@@ -8,6 +8,7 @@ import { MdEmail } from "react-icons/md";
 import CheckAuth from "../components/CheckAuth";
 
 function NewUser() {
+  CheckAuth()
   var [level, setLevel] = useState(0);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
