@@ -37,7 +37,7 @@ function NewUser() {
     <>
       <div className={Style.wrap}>
         <form className={Style.form}>
-          <h4 className="text-light">Registrar novo usuário</h4>
+          <h4 className="text-light text-center">Registrar novo usuário</h4>
 
           <div className="input-group mb-2 mt-4">
             <span className="input-group-text" id="basic-addon1">

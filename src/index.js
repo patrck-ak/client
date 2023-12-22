@@ -7,7 +7,7 @@ import App from './App';
 import Home from './routes/Home'
 import NewPacient from './routes/NewPacient';
 import ListPacients from './routes/ListPacients';
-import AuthUser from './components/AuthUser';
+import AuthUser from './routes/AuthUser';
 import NewUser from './routes/NewUser';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
@@ -22,7 +22,7 @@ const router = createBrowserRouter([{
       element: <AuthUser />,
     },
     {
-      path: "/home",
+      path: "/dashboard",
       element: <Home />
     },
     {
