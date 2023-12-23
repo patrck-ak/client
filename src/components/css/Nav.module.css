@@ -17,13 +17,16 @@
   justify-self: left;
   color: aliceblue;
   list-style: none;
-} 
+} .NavItem:first-child {
+  margin-left: 30px;
+}
 
 .UserCont {
   justify-self: right;
   color: #f0f8ff;
   list-style: none;
   margin-left: 50vw;
+  margin-right: 30px;
 }
 
 .Link {

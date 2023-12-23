@@ -1,62 +1,73 @@
 /* eslint-disable no-unused-vars */
+import axios from "axios";
+import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import Style from "./css/NewPacient.module.css";
-import axios from 'axios';
 import CheckAuth from "../components/CheckAuth";
+import InputMask from 'react-input-mask';
+import { FaAddressBook, FaIdCard, FaUser } from "react-icons/fa";
 
 function NewPacient() {
-  CheckAuth()
-  // const [name, setName] = useState();
-  // const [email, setEmail] = useState();
-  // const [addr, setAddr] = useState();
-  // const [passwordAdmin, setPasswordAdmin] = useState();
+  CheckAuth();
+
+  const [name, setName] = useState();
+  const [user, setUser] = useState();
+  var [cpf, setCpf] = useState(0);
 
   return (
     <>
-      <section className={Style.pageSection}>
-        <form className={Style.form}>
-          <h3>Novo Paciente</h3>
+      <Nav />
+      <form className={Style.Container}>
+        <div className="input-group">
+        <div className="input-group mb-2 mt-4 w-50">
+          <span className="input-group-text" id="basic-addon1">
+            <FaUser />
+          </span>
           <input
             type="text"
-            // onChange={(e) => setName(e.target.value)}
-            className={Style.input}
-            placeholder="Nome Completo"
-            name="userName"
-            id="userName"
+            onChange={(e) => setName(e.target.value)}
+            className="form-control"
+            placeholder="Nome do Paciente"
           />
-          <input
-            type="email"
-            // onChange={(e) => setEmail(e.target.value)}
-            className={Style.input}
-            placeholder="Email"
-            name="mail"
-            id="mail"
-          />
+        </div>
+        <div className="input-group mb-2 mt-4 w-50">
+          <span className="input-group-text" id="basic-addon1">
+            <FaUser />
+          </span>
           <input
             type="text"
-            // onChange={(e) => setAddr(e.target.value)}
-            className={Style.input}
-            placeholder="Endereço"
-            name="addr"
-            id="addr"
+            onChange={(e) => setName(e.target.value)}
+            className="form-control"
+            placeholder="Nome do Paciente"
           />
-          <input
-            type="password"
-            // onChange={(e) => setPasswordAdmin(e.target.value)}
-            className={Style.input}
-            placeholder="Senha de Admin"
-            name="passAdm"
-            id="passAdm"
-          />
-          <br />
-          <input
-            type="submit"
-            className={Style.btn}
-            value="Enviar"
-          />
-        </form>
+        </div>
+        </div>
 
-      </section>
+        <div className="input-group mb-2">
+          <span className="input-group-text" id="basic-addon1">
+            <FaIdCard />
+          </span>
+          <input
+            type="number"
+            onChange={(e) => setCpf(e.target.value)}
+            className="form-control"
+            placeholder="CPF"
+          />
+        </div>
+
+        <div className="input-group mb-2">
+          <span className="input-group-text" id="basic-addon1">
+            <FaAddressBook />
+          </span>
+          <input
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            className="form-control"
+            placeholder="Endereço"
+          />
+        </div>
+
+      </form>
     </>
   );
 }
