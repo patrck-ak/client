@@ -1,22 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Armata&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Armata&display=swap");
 
 * {
-  font-family: 'Armata', sans-serif;
+  font-family: "Armata", sans-serif;
   outline: none;
   margin: 0;
   padding: 0;
   user-select: none;
   outline: none;
   border: none;
+
 }
 
 body {
-  height: 80vh;
+  overflow: hidden; 
+  height: 100vh;
   background-repeat: no-repeat;
-  background: rgb(29,53,87);
-  background: -moz-linear-gradient(169deg, rgba(29,53,87,1) 0%, rgba(13,27,42,1) 100%);
-  background: -webkit-linear-gradient(169deg, rgba(29,53,87,1) 0%, rgba(13,27,42,1) 100%);
-  background: linear-gradient(169deg, rgba(29,53,87,1) 0%, rgba(13,27,42,1) 100%);
+  background: rgb(29, 53, 87);
+  background: -moz-linear-gradient(
+    169deg,
+    rgba(29, 53, 87, 1) 0%,
+    rgba(13, 27, 42, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    169deg,
+    rgba(29, 53, 87, 1) 0%,
+    rgba(13, 27, 42, 1) 100%
+  );
+  background: linear-gradient(
+    169deg,
+    rgba(29, 53, 87, 1) 0%,
+    rgba(13, 27, 42, 1) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1d3557",endColorstr="#0d1b2a",GradientType=1);
   color: aliceblue;
 }

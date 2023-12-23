@@ -1,0 +1,40 @@
+
+.NavList {
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  position: fixed;
+  justify-content: space-between;
+  background: #202020;
+  overflow: -moz-hidden-unscrollable;
+}
+
+.NavItem {
+  margin-top: 5px;
+  overflow: hidden;
+  justify-self: left;
+  color: aliceblue;
+  list-style: none;
+} 
+
+.UserCont {
+  justify-self: right;
+  color: #f0f8ff;
+  list-style: none;
+  margin-left: 50vw;
+}
+
+.Link {
+  color: white;
+  text-decoration: none;
+  transition: 0.2s ease-in-out;
+  -webkit-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -ms-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+} .Link:hover {
+  color: aquamarine;
+
+}

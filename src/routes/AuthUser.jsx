@@ -15,7 +15,7 @@ function AuthUser() {
   var auth = sessionStorage.getItem("auth");
   if (auth === "true") {
     window.location.href = "/dashboard";
-  }
+  } 
 
   const authUser = (e) => {
     e.preventDefault(); // cancela o envio padrão

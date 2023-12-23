@@ -1,17 +1,14 @@
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-}
+
 
 .wrap {
-  background: #202020;
-  margin-top: 10em;
-  width: 400px;
   padding: 3em;
+  margin: auto;
+  background: #202020;
+  margin-top: 5em;
+  width: 400px;
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
-}
+} 

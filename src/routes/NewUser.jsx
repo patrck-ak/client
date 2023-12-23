@@ -6,6 +6,7 @@ import Style from "./css/NewUser.module.css";
 import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import CheckAuth from "../components/CheckAuth";
+import Nav from '../components/Nav';
 
 function NewUser() {
   CheckAuth()
@@ -35,8 +36,10 @@ function NewUser() {
 
   return (
     <>
-      <div className={Style.wrap}>
-        <form className={Style.form}>
+    <Nav />
+
+      <div className={Style.wrap}> 
+        <form className="m-auto">
           <h4 className="text-light text-center">Registrar novo usuário</h4>
 
           <div className="input-group mb-2 mt-4">
