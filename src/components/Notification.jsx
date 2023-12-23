@@ -1,13 +1,13 @@
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-import { FaExclamation } from 'react-icons/fa'
+import { FaExclamation } from 'react-icons/fa';
 
 function Notification({msg}) {
   return ( (msg === ' ' ? <></> : (
     <div
       className="toast-absolute"
     >
-      <ToastContainer position="top-end" className="p-3" style={{ zIndex: 1 }}>
+      <ToastContainer position="top-start" className="p-3" style={{ zIndex: 1, marginTop: "2em" }}>
         <Toast className="bg-dark-subtle text-bg-darker">
           <Toast.Header className="bg-dark text-bg-dark">
             <img

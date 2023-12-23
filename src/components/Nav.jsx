@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaHome, FaUser, FaUserCircle, FaUserCog } from 'react-icons/fa'
 import CheckAuth from './CheckAuth'
 
-function ColorSchemesExample() {
+function Nav() {
   CheckAuth()
 
     
@@ -34,17 +34,19 @@ function ColorSchemesExample() {
 
         <li className={Style.UserCont}>
           <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            <FaUserCircle/> {name}
+            <FaUserCircle className='mb-1' /> {name}
           </button>
+
           <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
             <Link className="dropdown-item"  to={`/user/id:?${uid}`}> Editar usuário </Link>
             <hr className='dropdown-divider' />
             <Link className="dropdown-item" to='#' onClick={LogOut}> Finaliza Sessão</Link>
           </ul>
+          
         </li>
       </ul>
     </>
   );
 }
 
-export default ColorSchemesExample;
+export default Nav;

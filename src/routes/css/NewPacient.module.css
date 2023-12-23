@@ -1,14 +1,29 @@
 .Container {
   padding: 3em;
-  width: 700px;
-  margin-top: 7em;
-  margin-inline: auto;
+  width: 500px;
   background: #202020;
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
+  margin-left: 50px;
+}
+
+.buttonContainer {
+  margin-top: 49%;
+}
+
+.formContainer {
+  justify-content: center;
+  display: flex;
+  margin-inline: auto;
+  margin-top: 5em;
+}
+
+.bodyContainer {
+  display: flex;
+  justify-content: center;
 }
 
 h3 {
