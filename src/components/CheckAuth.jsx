@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 
  const CheckAuth = async () => {
-  var baseUrl = 'http://localhost:5000/validation';
+  var baseUrl = 'https://api-connectmed.onrender.com/validation';
 
   const token = sessionStorage.getItem("access-token");
   const userID = sessionStorage.getItem("access-uid")
