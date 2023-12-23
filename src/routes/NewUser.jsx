@@ -16,7 +16,7 @@ function NewUser() {
   const [pass, setPass] = useState();
   const [confirm, setConfirm] = useState();
 
-  const urlBase = "http://localhost:5000/user/new/admin";
+  const urlBase = "https://api-connectmed.onrender.com/user/new/admin";
   const regUser = (e) => {
     e.preventDefault();
     if (pass === confirm) {

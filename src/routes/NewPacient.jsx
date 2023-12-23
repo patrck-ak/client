@@ -35,7 +35,7 @@ function NewPacient() {
   const [desc, setDesc] = useState();
   var [erro, setErro] = useState(" ");
   var [cpf, setCpf] = useState(0);
-  var urlBase = "http://localhost:5000/pacients/create";
+  var urlBase = "https://api-connectmed.onrender.com/pacients/create";
 
   function createPacient(e) {
     e.preventDefault()

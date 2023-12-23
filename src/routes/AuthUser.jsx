@@ -5,7 +5,7 @@ import Notification from "../components/Notification";
 import { FaLock, FaLockOpen, FaUser } from "react-icons/fa";
 
 function AuthUser() {
-  const urlBase = "http://localhost:5000/auth/user";
+  const urlBase = "https://api-connectmed.onrender.com/auth/user";
 
   const [nameInput, setName] = useState();
   const [passInput, setPass] = useState();
