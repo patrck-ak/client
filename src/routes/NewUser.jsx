@@ -1,15 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Style from "./css/NewUser.module.css";
 import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import CheckAuth from "../components/CheckAuth";
-import Nav from '../components/Nav';
+import Nav from "../components/Nav";
+import Notification from "../components/Notification";
 
 function NewUser() {
-  CheckAuth()
+  CheckAuth();
+  var [load, setLoad] = useState(true)
+
+  function loadIco() {
+    setLoad(false)
+    setTimeout(() => {
+      setLoad(true)
+    }, 2000);
+  }
+
+  var erro = " ";
+  var titulo = " ";
   var [level, setLevel] = useState(0);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -17,8 +27,10 @@ function NewUser() {
   const [confirm, setConfirm] = useState();
 
   const urlBase = "https://api-connectmed.onrender.com/user/new/admin";
+
   const regUser = (e) => {
     e.preventDefault();
+    loadIco()
     if (pass === confirm) {
       axios
         .post(urlBase, { name: name, email: email, pass: pass, level: level })
@@ -29,16 +41,20 @@ function NewUser() {
           console.log(err);
         });
     } else {
-      //! finalizar sistema de infobox
-      console.log("senhas não batem");
+      //* printa erro de senha não são identicas
+      titulo = "ERRO";
+      erro = "Senhas não são idênticas";
+      setTimeout(() => {
+        erro = " ";
+      }, 2000);
     }
   };
 
   return (
     <>
-    <Nav />
-
-      <div className={Style.wrap}> 
+      <Nav />
+      <Notification msg={erro} tit={titulo}/>
+      <div className={Style.wrap}>
         <form className="m-auto">
           <h4 className="text-light text-center">Registrar novo usuário</h4>
 
@@ -108,10 +124,9 @@ function NewUser() {
 
           <button
             type="submit"
-            className="btn btn-dark"
-            onClick={(e) => regUser(e)}
-          >
-            Cadastrar
+            className="btn btn-success"
+            onClick={(e) => regUser(e)}>
+            <span className="spinner-border spinner-border-sm" hidden={load}></span>  Cadastrar
           </button>
         </form>
       </div>

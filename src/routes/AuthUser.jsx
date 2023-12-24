@@ -8,7 +8,7 @@ function AuthUser() {
   const urlBase = "https://api-connectmed.onrender.com/auth/user";
 
   const [nameInput, setName] = useState();
-  const [passInput, setPass] = useState();
+  const [passInput, setPass] = useState(); 
   var [erro, setErro] = useState(" ");
   var data;
 
@@ -42,11 +42,11 @@ function AuthUser() {
               break;
             case 5:
               //* recupera dados da api e salva no sessionStorage do navegador.
-              sessionStorage.setItem("access-token", data.token);
-              sessionStorage.setItem("access-uid", data.id);
-              sessionStorage.setItem("name", data.name);
-              sessionStorage.setItem("level", data.level);
-              sessionStorage.setItem("auth", true);
+              localStorage.setItem("access-token", data.token);
+              localStorage.setItem("access-uid", data.id);
+              localStorage.setItem("name", data.name);
+              localStorage.setItem("level", data.level);
+              localStorage.setItem("auth", true);
 
               console.log(
                 `usuário ${data.name} logado \n token: ${data.token} \nUserID: ${data.id}`
