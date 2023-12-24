@@ -7,15 +7,15 @@ function Nav() {
   CheckAuth()
 
     
-  var n = sessionStorage.getItem('name')
-  var uid = sessionStorage.getItem('access-uid')
+  var n = localStorage.getItem('name')
+  var uid = localStorage.getItem('access-uid')
   var name;
   if(n !== null) {
     name = n.charAt(0).toUpperCase() + n.slice(1);
   }
   
   function LogOut() {
-    sessionStorage.clear()
+    localStorage.clear()
     window.location.href = '/'
   }
 

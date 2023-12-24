@@ -2,22 +2,32 @@ import { useState } from "react";
 import axios from "axios";
 import Style from "./css/AuthUser.module.css";
 import Notification from "../components/Notification";
-import { FaLock, FaLockOpen, FaUser } from "react-icons/fa";
+import { FaLock, FaUser } from "react-icons/fa";
 
 function AuthUser() {
-  const urlBase = "https://api-connectmed.onrender.com/auth/user";
-
-  const [nameInput, setName] = useState();
-  const [passInput, setPass] = useState(); 
-  var [erro, setErro] = useState(" ");
-  var data;
-
   var auth = sessionStorage.getItem("auth");
   if (auth === "true") {
     window.location.href = "/dashboard";
   } 
 
+  const urlBase = "https://api-connectmed.onrender.com/auth/user";
+
+  var [load, setLoad] = useState(true)
+  const [nameInput, setName] = useState();
+  const [passInput, setPass] = useState(); 
+  var [erro, setErro] = useState(" ");
+  var data;
+
+  function loadBtn() {
+    setLoad(false)
+    setTimeout(() => {
+      setLoad(true)
+    }, 1000);
+  }
+
+
   const authUser = (e) => {
+    loadBtn()
     e.preventDefault(); // cancela o envio padrão
     //* tenta enviar um post pelo axios
     try {
@@ -112,7 +122,7 @@ function AuthUser() {
             <br />
 
             <button onClick={authUser} className="btn btn-light" type="submit">
-              <FaLockOpen className="mb-1" /> Entrar
+            <span className="spinner-border spinner-border-sm" style={{marginRight: '5px'}} hidden={load}></span>Entrar
             </button>
         </form>
       </div>
