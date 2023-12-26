@@ -9,6 +9,9 @@ import Notification from "../components/Notification";
 
 function NewUser() {
   CheckAuth();
+
+  const adminLevel = localStorage.getItem('level');
+
   var [load, setLoad] = useState(true)
 
   function loadIco() {
@@ -33,7 +36,7 @@ function NewUser() {
     loadIco()
     if (pass === confirm) {
       axios
-        .post(urlBase, { name: name, email: email, pass: pass, level: level })
+        .post(urlBase, { name: name, email: email, pass: pass, level: level, adminLevel: adminLevel })
         .then(async (res) => {
           console.log(res);
         }) //! finalizar sistema de envio de log
