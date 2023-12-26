@@ -10,14 +10,6 @@
   width: 150px;
 }
 
-span {
-  transition: .5s ease-in-out;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -ms-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-}
-
 .formContainer {
   text-align: center;
   width: 350px;
