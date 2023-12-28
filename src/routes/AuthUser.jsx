@@ -124,7 +124,6 @@ function AuthUser() {
             <button onClick={authUser} className="btn btn-light" type="submit">
             <span className="spinner-border spinner-border-sm" style={{marginRight: '5px'}} hidden={load}></span>Entrar
             </button>
-            <small>first load may be a little slow</small>
         </form>
       </div>
     </div>
