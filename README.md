@@ -14,4 +14,4 @@ Um gerenciador de atendimentos, simplificação de agendamentos de consultas e v
 https://clientside-connect-med.vercel.app/
 
 ### Instalação
- ´´´npm install; npm start´´´
+ ´´´ npm install; npm start ´´´
