@@ -19,11 +19,14 @@ import { MdEmail } from "react-icons/md";
 function NewPacient() {
   CheckAuth();
 
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  console.log(today);
+  // const timeElapsed = Date.now();
+  // const today = new Date(timeElapsed);
+  // console.log(today);
 
-  var nameAdmin = sessionStorage.getItem("name");
+  var nameAdmin = localStorage.getItem("name");
+
+  // variavel de erro
+  var [erro, setErro] = useState(" ");
 
   // dados medico
   const [pass, setPass] = useState();
@@ -33,7 +36,6 @@ function NewPacient() {
   const [email, setEmail] = useState();
   const [address, setAddress] = useState();
   const [desc, setDesc] = useState();
-  var [erro, setErro] = useState(" ");
   var [cpf, setCpf] = useState(0);
   var urlBase = "https://api-connectmed.onrender.com/pacients/create";
 
@@ -49,7 +51,7 @@ function NewPacient() {
         cpf: cpf,
         pass: pass,
         admin: nameAdmin,
-        date: today 
+        // date: today 
       },
     })
     .then()
@@ -169,7 +171,6 @@ function NewPacient() {
               <FaTrash style={{ marginRight: "5px", marginBottom: "3px" }} />
               Apagar dados
             </button>
-            {/* <input type="button" onClick={defErro} value={"teste"} /> */}
           </div>
         </div>
       </form>
