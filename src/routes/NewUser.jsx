@@ -3,15 +3,11 @@ import React, { useState } from "react";
 import Style from "./css/NewUser.module.css";
 import { FaLock, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import CheckAuth from "../components/CheckAuth";
 import Nav from "../components/Nav";
 import Notification from "../components/Notification";
 
 function NewUser() {
-  CheckAuth();
-
   const adminLevel = localStorage.getItem('level');
-
   var [load, setLoad] = useState(true)
 
   function loadIco() {

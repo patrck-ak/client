@@ -5,7 +5,7 @@ import Notification from "../components/Notification";
 import { FaLock, FaUser } from "react-icons/fa";
 
 function AuthUser() {
-  var auth = sessionStorage.getItem("auth");
+  var auth = localStorage.getItem("auth");
   if (auth === "true") {
     window.location.href = "/dashboard";
   } 

@@ -9,6 +9,7 @@ import NewPacient from './routes/NewPacient';
 import ListPacients from './routes/ListPacients';
 import AuthUser from './routes/AuthUser';
 import NewUser from './routes/NewUser';
+import EditUser from './routes/EditUser'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([{
       path: "/user/register",
       element: <NewUser />,
     },
+    {
+      path: "/user/edit/",
+      element: <EditUser />,
+    }
   ],
 },
 ])

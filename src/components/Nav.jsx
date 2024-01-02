@@ -5,11 +5,11 @@ import CheckAuth from './CheckAuth'
 
 function Nav() {
   CheckAuth()
-
     
   var n = localStorage.getItem('name')
-  var uid = localStorage.getItem('access-uid')
   var name;
+
+  // Deixar a primeira letra do nome em Uppercase
   if(n !== null) {
     name = n.charAt(0).toUpperCase() + n.slice(1);
   }
@@ -38,7 +38,7 @@ function Nav() {
           </button>
 
           <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-            <Link className="dropdown-item"  to={`/user/id:?${uid}`}> Editar usuário </Link>
+            <Link className="dropdown-item"  to={'/user/edit/'}> Editar usuário </Link>
             <hr className='dropdown-divider' />
             <Link className="dropdown-item" to='#' onClick={LogOut}> Finaliza Sessão</Link>
           </ul>

@@ -17,10 +17,10 @@ import { useEffect } from "react";
     if(x.stts === false) {
       return (
         console.error('token não validado'),
-        window.location.href = '/'
+        window.location.href = '/',
+        localStorage.clear()
       )
     } else {
-      return console.log('token validado.')
     }
   }) 
   .catch((err) => {
