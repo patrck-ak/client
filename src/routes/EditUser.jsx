@@ -4,25 +4,36 @@ import Nav from "../components/Nav";
 import axios from "axios";
 
 function EditUser() {
-  const urlBase = "http://localhost:5000/user/edit";
+  const urlBase = "http://localhost:5000/user/edit/";
   const name = localStorage.getItem("name");
+  const id = localStorage.getItem("access-uid");
+  const token = localStorage.getItem("access-token");
   var res;
 
-  console.log(name);
-  useEffect(() => {
+  const getUser = () => {
     axios
-      .get(urlBase, { name: name })
-      .then((r) => {
-        res = r.data;
-        console.log(res.data, name);
-      })
-      .catch((erro) => console.log(erro));
-  });
+    .post(urlBase, {
+      data: { 
+        nam: name, 
+        id: id, 
+        token: token,
+        // date: today 
+},})
+    .then(async (response) => {
+      res = response.data
+    })
+    .catch((err) => console.log(err));
+  }
+
+  console.log(name);
+  console.log(res);
+  useEffect(() => {
+    getUser()
+  }, []);
 
   return (
     <>
       <Nav />
-      
     </>
   );
 }

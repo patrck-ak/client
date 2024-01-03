@@ -52,8 +52,7 @@ function NewPacient() {
         admin: nameAdmin,
         idadmin: idAdmin 
         // date: today 
-      },
-    })
+},})
     .then()
     .catch();
   }
