@@ -1,32 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Nav from "../components/Nav";
 import axios from "axios";
 
 function EditUser() {
   const urlBase = "http://localhost:5000/user/edit";
-  const uid = localStorage.getItem("access-uid");
+  const name = localStorage.getItem("name");
+  var res;
 
-  var [res, setRes] = useState();
-
+  console.log(name);
   useEffect(() => {
     axios
-    .get(urlBase, {
-      uid: uid,
-    })
-    .then((response) => {
-      setRes(response)
-      console.log(res, uid)
-    })
-    .catch(() => console.log('Erro interno'));
-
-  }, [])
-
+      .get(urlBase, { name: name })
+      .then((r) => {
+        res = r.data;
+        console.log(res.data, name);
+      })
+      .catch((erro) => console.log(erro));
+  });
 
   return (
     <>
       <Nav />
-
+      
     </>
   );
 }
