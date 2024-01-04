@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import axios from 'axios';
 import Nav from '../components/Nav';
-import { useState } from 'react';
-import './css/NewPacient.module.css';
 import Style from './css/NewPacient.module.css';
+import './css/NewPacient.module.css';
+import { InputMask } from '@react-input/mask';
+
 import {
   FaAddressBook,
   FaIdCard,
@@ -25,7 +27,7 @@ function NewPacient() {
   var idAdmin = localStorage.getItem('uid')
 
   // variavel de erro
-  var [erro, setErro] = useState(' ');
+  var erro = ' ';
 
   // dados medico
   const [pass, setPass] = useState();
@@ -37,9 +39,10 @@ function NewPacient() {
   const [desc, setDesc] = useState();
   var [cpf, setCpf] = useState(0);
   var urlBase = 'https://api-connectmed.onrender.com/pacients/create';
+  var res;
 
   function createPacient(e) {
-    e.preventDefault()
+    e.preventDefault();
     axios
     .post(urlBase, {
       data: { 
@@ -53,16 +56,25 @@ function NewPacient() {
         idadmin: idAdmin 
         // date: today 
 },})
-    .then()
+    .then((response) => {
+      res = response.data
+      switch (res.status) {
+        case 1:
+        erro = res.err
+          break
+
+        default:
+          console.log('Erro interno.')
+          break
+      }
+    })
     .catch();
   }
 
-
-
   function defErro(msg) {
-    setErro(msg);
+    erro = msg;
     setTimeout(() => {
-      setErro(' ');
+      erro = ' ';
     }, 6000);
   }
 
@@ -99,11 +111,13 @@ function NewPacient() {
             <span className='input-group-text' id='basic-addon1'>
               <FaIdCard />
             </span>
-            <input
-              type='number'
+            <InputMask
+              mask='___.___.___-__'
+              replacement='_'
+              type='text'
               onChange={(e) => setCpf(e.target.value)}
               className='form-control'
-              placeholder='CPF (sem pontuação)'
+              placeholder='CPF'
             />
           </div>
 
@@ -119,7 +133,7 @@ function NewPacient() {
             />
           </div>
           <div className='form-group text-bg-dark mt-3'>
-            <label htmlFor='desc'>Descrição do atendimento</label>
+            <label htmlFor='desc'>Descrição do paciente</label>
             <textarea
               className='form-control mt-1'
               id='desc'
@@ -159,7 +173,7 @@ function NewPacient() {
             <button 
             type='submit' 
             className='btn btn-success mt-5'
-            onChange={createPacient}>
+            onClick={(e) => createPacient(e)}>
               Enviar Prontuário
             </button>
 
