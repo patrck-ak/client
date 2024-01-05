@@ -35,7 +35,7 @@ function NewPacient() {
   const [address, setAddress] = useState("");
   const [desc, setDesc] = useState("");
   var [cpf, setCpf] = useState(0);
-  var urlBase = "http://localhost:5000/pacients/create";
+  var urlBase = "https://api-connectmed.onrender.com/pacients/create";
   var res;
 
   function defNotif(msgres, title) {
