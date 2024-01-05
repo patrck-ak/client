@@ -1,9 +1,8 @@
-import React from 'react'
 import {axios} from 'axios'
 
 
 function Logger({msg, err, id, date}) {
-  const urlBase = 'http://localhost:5000/log'
+  const urlBase = 'https://api-connectmed.onrender.com/log/medic'
 
   const LoggerF = () => { 
     axios.post(urlBase, {
