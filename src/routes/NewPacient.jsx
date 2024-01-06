@@ -21,8 +21,7 @@ function NewPacient() {
   var nameAdmin = localStorage.getItem("name");
   var idAdmin = localStorage.getItem("uid");
 
-  //! PAREI AQUI FAZENDO O SISTEMA DE NOTIFICAÇÃO
-  // variavel de erro
+  // variavel de notificação
   var [msg, setMsg] = useState(" ");
   var [title, setTitle] = useState(" ");
 
@@ -35,8 +34,17 @@ function NewPacient() {
   const [address, setAddress] = useState("");
   const [desc, setDesc] = useState("");
   var [cpf, setCpf] = useState(0);
-  var urlBase = "https://api-connectmed.onrender.com/pacients/create";
+  var urlBase = "http://localhost:5000/pacients/create";
   var res;
+
+  var [load, setLoad] = useState(true)
+
+  function loadBtn() {
+    setLoad(false)
+    setTimeout(() => {
+      setLoad(true)
+    }, 2000);
+  }
 
   function defNotif(msgres, title) {
     setMsg(msgres);
@@ -49,6 +57,7 @@ function NewPacient() {
 
   function createPacient(e) {
     e.preventDefault();
+    loadBtn()
     axios
       .post(urlBase, {
         nam: name,
@@ -176,6 +185,7 @@ function NewPacient() {
               className="btn btn-success mt-5"
               onClick={(e) => createPacient(e)}
             >
+            <span className="spinner-border spinner-border-sm" style={{marginRight: '5px'}} hidden={load}></span>
               Enviar Prontuário
             </button>
 

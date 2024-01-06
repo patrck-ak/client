@@ -17,8 +17,20 @@ function NewUser() {
     }, 2000);
   }
 
-  var erro = " ";
-  var titulo = " ";
+  function defNotif(msgres, title) {
+    setMsg(msgres);
+    setTitle(title);
+    setTimeout(() => {
+      setMsg(" ");
+      setTitle(" ");
+    }, 6000);
+  }
+
+  // variavel de notificação
+  var [msg, setMsg] = useState(" ");
+  var [title, setTitle] = useState(" ");
+  var res;
+
   var [level, setLevel] = useState(0);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -33,26 +45,33 @@ function NewUser() {
     if (pass === confirm) {
       axios
         .post(urlBase, { name: name, email: email, pass: pass, level: level, adminLevel: adminLevel })
-        .then(async (res) => {
-          console.log(res);
+        .then((response) => {
+          res = response.data;
+          console.log(res.status);
+          switch (res.status) {
+            case 5:
+              defNotif(res.msg, res.title);
+              break;
+            case 10:
+              defNotif(res.msg, res.title);
+              break;
+            default:
+              defNotif('Erro interno, tente mais tarde.', 'ERRO')
+              break;
+          }
         }) //! finalizar sistema de envio de log
         .catch((err) => {
           console.log(err);
         });
     } else {
       //* printa erro de senha não são identicas
-      titulo = "ERRO";
-      erro = "Senhas não são idênticas";
-      setTimeout(() => {
-        erro = " ";
-      }, 2000);
     }
   };
 
   return (
     <>
       <Nav />
-      <Notification msg={erro} tit={titulo}/>
+      <Notification msg={msg} title={title}/>
       <div className={Style.wrap}>
         <form className="m-auto">
           <h4 className="text-light text-center">Registrar novo usuário</h4>
@@ -65,7 +84,7 @@ function NewUser() {
               type="text"
               onChange={(e) => setName(e.target.value)}
               className="form-control"
-              placeholder="Username ID"
+              placeholder="ID do médico"
             />
           </div>
 
@@ -74,10 +93,11 @@ function NewUser() {
               <MdEmail />
             </span>
             <input
-              type="text"
+              type="email"
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              placeholder="Valid Mail"
+              placeholder="E-mail válido"
+              required
             />
           </div>
 
@@ -89,7 +109,7 @@ function NewUser() {
               type="password"
               onChange={(e) => setPass(e.target.value)}
               className="form-control"
-              placeholder="Password"
+              placeholder="Senha"
             />
           </div>
 
@@ -101,7 +121,7 @@ function NewUser() {
               type="password"
               onChange={(e) => setConfirm(e.target.value)}
               className="form-control"
-              placeholder="Confirm Password"
+              placeholder="Confirmação da Senha"
             />
           </div>
 
@@ -117,7 +137,6 @@ function NewUser() {
               defaultValue={0}
               onChange={(e) => setLevel(e.target.value)}
               className="form-range"
-              placeholder="Confirm Password"
             />
           </div>
 

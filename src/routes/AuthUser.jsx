@@ -10,56 +10,58 @@ function AuthUser() {
     window.location.href = "/dashboard";
   } 
 
-  const urlBase = "https://api-connectmed.onrender.com/auth/user";
+  const urlBase = "http://localhost:5000/auth/user";
 
+  var [msg, setMsg] = useState(" ");
+  var [title, setTitle] = useState(" ");
   var [load, setLoad] = useState(true)
   const [nameInput, setName] = useState();
   const [passInput, setPass] = useState(); 
-  var [erro, setErro] = useState(" ");
-  var data;
+  var res;
 
   function loadBtn() {
     setLoad(false)
     setTimeout(() => {
       setLoad(true)
-    }, 10000);
+    }, 2000);
   }
 
+  function defNotif(msgres, title) {
+    setMsg(msgres);
+    setTitle(title);
+    setTimeout(() => {
+      setMsg(" ");
+      setTitle(" ");
+    }, 3000);
+  }
 
   const authUser = (e) => {
-    loadBtn()
     e.preventDefault(); // cancela o envio padrão
+    loadBtn()
+    
     //* tenta enviar um post pelo axios
     try {
       axios
         .post(urlBase, { name: nameInput, pass: passInput })
-        .then((res) => {
-          data = res.data;
+        .then((response) => {
+          res = response.data;
 
           //* verifica se foi logado
-          switch (data.status) {
-            case 1:
-              setErro(data.err);
-              break;
-            case 2:
-              setErro(data.err);
-              break;
-            case 3:
-              setErro(data.err);
-              break;
-            case 4:
-              setErro(data.err);
-              break;
+          switch (res.status) {
             case 5:
+              defNotif(res.msg, res.title);
+              break;
+
+            case 10:
               //* recupera dados da api e salva no sessionStorage do navegador.
-              localStorage.setItem("access-token", data.token);
-              localStorage.setItem("access-uid", data.id);
-              localStorage.setItem("name", data.name);
-              localStorage.setItem("level", data.level);
-              localStorage.setItem("auth", true);
+              localStorage.setItem("access-token", res.token);
+              localStorage.setItem("access-uid", res.id);
+              localStorage.setItem("name", res.name);
+              localStorage.setItem("level", res.level);
+              localStorage.setItem("auth", res.auth);
 
               console.log(
-                `usuário ${data.name} logado \n token: ${data.token} \nUserID: ${data.id}`
+                `usuário ${res.name} logado \n token: ${res.token} \nUserID: ${res.id}`
               );
               //* redireciona para home do app
               window.location.href = "/dashboard";
@@ -80,7 +82,7 @@ function AuthUser() {
 
   return (
     <div>
-      <Notification msg={erro} />
+      <Notification msg={msg} title={title}/>
 
       <div className={Style.wrapForm}>
         <form className={Style.formContainer}>

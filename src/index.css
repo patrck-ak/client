@@ -31,4 +31,5 @@ body {
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1d3557",endColorstr="#0d1b2a",GradientType=1);
   color: aliceblue;
+  overflow: hidden;
 }
