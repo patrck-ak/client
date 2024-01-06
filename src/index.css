@@ -13,21 +13,21 @@
 body {
   height: 100vh;
   background-repeat: no-repeat;
-  background: rgb(29, 53, 87);
+  background: rgb(12, 23, 37);
   background: -moz-linear-gradient(
     169deg,
-    rgba(29, 53, 87, 1) 0%,
-    rgba(13, 27, 42, 1) 100%
+    rgb(16, 30, 49) 0%,
+    rgb(9, 18, 29) 100%
   );
   background: -webkit-linear-gradient(
     169deg,
-    rgba(29, 53, 87, 1) 0%,
-    rgba(13, 27, 42, 1) 100%
+    rgb(16, 30, 49) 0%,
+    rgb(9, 18, 29) 100%
   );
   background: linear-gradient(
     169deg,
-    rgba(29, 53, 87, 1) 0%,
-    rgba(13, 27, 42, 1) 100%
+    rgb(16, 30, 49) 0%,
+    rgb(9, 18, 29) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1d3557",endColorstr="#0d1b2a",GradientType=1);
   color: aliceblue;

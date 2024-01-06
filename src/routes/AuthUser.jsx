@@ -10,7 +10,7 @@ function AuthUser() {
     window.location.href = "/dashboard";
   } 
 
-  const urlBase = "http://localhost:5000/auth/user";
+  const urlBase = "https://api-connectmed.onrender.com/auth/user";
 
   var [msg, setMsg] = useState(" ");
   var [title, setTitle] = useState(" ");
