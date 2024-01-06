@@ -26,15 +26,15 @@ function NewPacient() {
   var [title, setTitle] = useState(" ");
 
   // dados medico
-  const [pass, setPass] = useState("");
+  const [pass, setPass] = useState();
 
   // dados do paciente
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [desc, setDesc] = useState("");
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [address, setAddress] = useState();
+  const [desc, setDesc] = useState();
   var [cpf, setCpf] = useState(0);
-  var urlBase = "http://localhost:5000/pacients/create";
+  var urlBase = "https://api-connectmed.onrender.com/pacients/create";
   var res;
 
   var [load, setLoad] = useState(true)

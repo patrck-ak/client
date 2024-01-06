@@ -2,13 +2,13 @@ import React from 'react'
 import Nav from '../components/Nav'
 
 
-const Home = () => {
+const MedicPanel = () => {
   return (
     <>
       <Nav />
-
+      
     </>
     )
 }
 
-export default Home 
+export default MedicPanel 
