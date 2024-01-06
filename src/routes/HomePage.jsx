@@ -86,7 +86,7 @@ function HomePage() {
 
       <div
         className="input-group"
-        style={{ position: "absolute", top: "20px", left: "4vw"}}
+        style={{ position: "absolute", top: "70px", left: "20px"}}
       >
         <input
           type="text"
