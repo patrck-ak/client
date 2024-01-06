@@ -2,27 +2,28 @@ import { useState } from "react";
 import axios from "axios";
 import Style from "./css/AuthUser.module.css";
 import Notification from "../components/Notification";
-import { FaLock, FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaArrowLeft, FaLock, FaUser } from "react-icons/fa";
 
 function AuthUser() {
   var auth = localStorage.getItem("auth");
   if (auth === "true") {
     window.location.href = "/dashboard";
-  } 
+  }
 
   const urlBase = "https://api-connectmed.onrender.com/auth/user";
 
   var [msg, setMsg] = useState(" ");
   var [title, setTitle] = useState(" ");
-  var [load, setLoad] = useState(true)
+  var [load, setLoad] = useState(true);
   const [nameInput, setName] = useState();
-  const [passInput, setPass] = useState(); 
+  const [passInput, setPass] = useState();
   var res;
 
   function loadBtn() {
-    setLoad(false)
+    setLoad(false);
     setTimeout(() => {
-      setLoad(true)
+      setLoad(true);
     }, 2000);
   }
 
@@ -37,8 +38,8 @@ function AuthUser() {
 
   const authUser = (e) => {
     e.preventDefault(); // cancela o envio padrão
-    loadBtn()
-    
+    loadBtn();
+
     //* tenta enviar um post pelo axios
     try {
       axios
@@ -82,7 +83,15 @@ function AuthUser() {
 
   return (
     <div>
-      <Notification msg={msg} title={title}/>
+      <Notification msg={msg} title={title} />
+
+      <Link to={"/"}>
+        <button
+          className="btn btn-dark"
+          style={{ position: "absolute", left: "20px", top: "20px" }}>
+          <FaArrowLeft />
+        </button>
+      </Link>
 
       <div className={Style.wrapForm}>
         <form className={Style.formContainer}>
@@ -92,40 +101,45 @@ function AuthUser() {
             className={Style.logoImg}
           />
           <br />
-            <div className="input-group m-auto mb-1 mt-4 w-75">
-              <span className="input-group-text text-center" id="basic-addon1">
-                <FaUser />
-              </span>
-              <input
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                className="form-control"
-                name="userID"
-                placeholder="ID"
-                id="userID"
-              />
-            </div>
-            <br />
+          <div className="input-group m-auto mb-1 mt-4 w-75">
+            <span className="input-group-text text-center" id="basic-addon1">
+              <FaUser />
+            </span>
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              className="form-control"
+              name="userID"
+              placeholder="ID"
+              id="userID"
+            />
+          </div>
+          <br />
 
-            <div className="input-group m-auto mb-2 w-75">
-              <span className="input-group-text text-center" id="basic-addon1">
-                <FaLock />
-              </span>
-              <input
-                type="password"
-                onChange={(e) => setPass(e.target.value)}
-                className="form-control"
-                name="pass"
-                placeholder="Senha"
-                id="pass"
-              />
-            </div>
+          <div className="input-group m-auto mb-2 w-75">
+            <span className="input-group-text text-center" id="basic-addon1">
+              <FaLock />
+            </span>
+            <input
+              type="password"
+              onChange={(e) => setPass(e.target.value)}
+              className="form-control"
+              name="pass"
+              placeholder="Senha"
+              id="pass"
+            />
+          </div>
 
-            <br />
+          <br />
 
-            <button onClick={authUser} className="btn btn-light" type="submit">
-            <span className="spinner-border spinner-border-sm" style={{marginRight: '5px'}} hidden={load}></span>Entrar
-            </button>
+          <button onClick={authUser} className="btn btn-light" type="submit">
+            <span
+              className="spinner-border spinner-border-sm"
+              style={{ marginRight: "5px" }}
+              hidden={load}
+            ></span>
+            Entrar
+          </button>
         </form>
       </div>
     </div>
