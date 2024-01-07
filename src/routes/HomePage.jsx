@@ -84,9 +84,10 @@ function HomePage() {
         </button>
       </Link>
 
+
       <div
         className="input-group"
-        style={{ position: "absolute", top: "70px", left: "20px"}}
+        style={{display: "flex", justifyContent: "center", top: "20px"}}
       >
         <input
           type="text"
