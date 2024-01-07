@@ -29,6 +29,7 @@ const MedicPanel = () => {
     axios
       .post(`${urlBase}/dashboard/listpacients`, { id: id, token: token })
       .then(async (response) => {
+        console.log('teste')
         setData(response.data.pacients);
         switch (response.data.status) {
           case 5:
