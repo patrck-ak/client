@@ -1,0 +1,5 @@
+.wrap {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+}

@@ -1,17 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Armata&display=swap");
 
 * {
-  font-family: "Armata", sans-serif;
-  outline: none;
   margin: 0;
   padding: 0;
-  user-select: none;
-  outline: none;
   border: none;
+  outline: none;
+  user-select: none;
+  font-family: "Armata", sans-serif;
 }
 
 body {
-  height: 100vh;
+  height: 100vmax;
   background-repeat: no-repeat;
   background: rgb(219,219,219);
   background: -moz-linear-gradient(173deg, rgba(219,219,219,1) 0%, rgba(130,144,159,1) 100%);
@@ -19,5 +18,4 @@ body {
   background: linear-gradient(173deg, rgba(219,219,219,1) 0%, rgba(130,144,159,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dbdbdb",endColorstr="#82909f",GradientType=1);
   color: aliceblue;
-  overflow: hidden;
 }

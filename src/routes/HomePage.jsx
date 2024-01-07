@@ -10,6 +10,10 @@ import axios from "axios";
 
 function HomePage() {
   const urlBase = "https://api-connectmed.onrender.com";
+  const isAuth = localStorage.getItem('auth')
+  if(isAuth === 'true') {
+    window.location.href = '/dashboard'
+  }
 
   var res;
   var resStatus = false;
