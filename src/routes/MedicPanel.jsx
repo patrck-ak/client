@@ -48,7 +48,7 @@ const MedicPanel = () => {
     <>
       <Nav />
       <Notification msg={msg} title={title} />
-      {useEffect(() => List, [1])}
+      {useEffect(() => List, [])}
       <div style={{ display: "flex", justifyContent: "center", marginTop: "7em" }}>
         <ul className="list-group" style={{ width: "80%", position: 'inherit' }}>
           <li className="list-group-item bg-dark border-dark">
