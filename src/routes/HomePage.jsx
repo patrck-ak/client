@@ -9,7 +9,7 @@ import Notification from "../components/Notification";
 import axios from "axios";
 
 function HomePage() {
-  const urlBase = "http://localhost:5000";
+  const urlBase = "https://api-connectmed.onrender.com";
 
   var res;
   var resStatus = false;
