@@ -8,9 +8,9 @@ import Style from "./css/MedicPanel.module.css";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
 const MedicPanel = () => {
-  const urlBase = "https://api-connectmed.onrender.com";
   const id = localStorage.getItem("access-uid");
   const token = localStorage.getItem("access-token");
+  const urlBase = "https://api-connectmed.onrender.com";
 
   var [data, setData] = useState([]);
   var [msg, setMsg] = useState(" ");
@@ -30,12 +30,13 @@ const MedicPanel = () => {
       .post(`${urlBase}/dashboard/listpacients`, { id: id, token: token })
       .then(async (response) => {
         console.log('teste')
-        setData(response.data.pacients);
+        setData(response.data.pacients)
         switch (response.data.status) {
           case 5:
             defNotif(data.msg, data.title);
             break;
           case 10:
+            defNotif("Usuários encontrados.", "INFO")
             console.log("[ConnectMed] - Dados validados");
             break;
           default:
@@ -48,7 +49,7 @@ const MedicPanel = () => {
     <>
       <Nav />
       <Notification msg={msg} title={title} />
-      {useEffect(() => List, [])}
+      <button onClick={List} style={{paddingTop: "50px"}} >a</button>
       <div style={{ display: "flex", justifyContent: "center", marginTop: "7em" }}>
         <ul className="list-group" style={{ width: "80%", position: 'inherit' }}>
           <li className="list-group-item bg-dark border-dark">
