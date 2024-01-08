@@ -36,7 +36,7 @@ const MedicPanel = () => {
             defNotif(data.msg, data.title);
             break;
           case 10:
-            defNotif("Usuários encontrados.", "INFO")
+            defNotif(`Pacientes atualizados: [${data.length}]` , "INFO")
             console.log("[ConnectMed] - Dados validados");
             break;
           default:
@@ -45,6 +45,11 @@ const MedicPanel = () => {
       })
       .catch((err) => console.log(err));
   }
+
+  useEffect(() => {
+    List()
+  },[])
+
   return (
     <>
       <Nav />
