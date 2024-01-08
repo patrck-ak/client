@@ -54,7 +54,6 @@ const MedicPanel = () => {
     <>
       <Nav />
       <Notification msg={msg} title={title} />
-      <button onClick={List} style={{paddingTop: "50px"}} >a</button>
       <div style={{ display: "flex", justifyContent: "center", marginTop: "7em" }}>
         <ul className="list-group" style={{ width: "80%", position: 'inherit' }}>
           <li className="list-group-item bg-dark border-dark">
