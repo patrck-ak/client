@@ -11,6 +11,7 @@ import EditUser from './routes/EditUser'
 import HomePage from './routes/HomePage';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
+import ErrorHandler from './routes/ErrorHandler';
 
 
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([{
     {
       path: "/user/edit/",
       element: <EditUser />,
+    },
+    {
+      path: "/*",
+      element: <ErrorHandler />,
     }
   ],
 },
