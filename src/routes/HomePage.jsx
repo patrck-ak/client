@@ -10,9 +10,9 @@ import axios from "axios";
 
 function HomePage() {
   const urlBase = "https://api-connectmed.onrender.com";
-  const isAuth = localStorage.getItem('auth')
-  if(isAuth === 'true') {
-    window.location.href = '/dashboard'
+  const isAuth = localStorage.getItem("status");
+  if (isAuth === "true") {
+    window.location.href = "/dashboard";
   }
 
   var res;
@@ -47,7 +47,7 @@ function HomePage() {
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setStatus("OFFLINE");
       });
   }
@@ -88,10 +88,9 @@ function HomePage() {
         </button>
       </Link>
 
-
       <div
         className="input-group"
-        style={{display: "flex", justifyContent: "center", top: "20px"}}
+        style={{ display: "flex", justifyContent: "center", top: "20px" }}
       >
         <input
           type="text"

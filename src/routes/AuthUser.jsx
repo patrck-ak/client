@@ -4,14 +4,17 @@ import Style from "./css/AuthUser.module.css";
 import Notification from "../components/Notification";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaLock, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function AuthUser() {
-  var auth = localStorage.getItem("auth");
-  if (auth === "true") {
-    window.location.href = "/dashboard";
-  }
-
+  const navigate = useNavigate();
   const urlBase = "https://api-connectmed.onrender.com/auth/user";
+
+  var status = localStorage.getItem("status");
+  if (status === "true") {
+    console.log("valido");
+    navigate("/dashboard");
+  }
 
   var [msg, setMsg] = useState(" ");
   var [title, setTitle] = useState(" ");
@@ -24,7 +27,7 @@ function AuthUser() {
     setLoad(false);
     setTimeout(() => {
       setLoad(true);
-    }, 2000);
+    }, 1200);
   }
 
   function defNotif(msgres, title) {
@@ -58,8 +61,7 @@ function AuthUser() {
               localStorage.setItem("access-token", res.token);
               localStorage.setItem("access-uid", res.id);
               localStorage.setItem("name", res.name);
-              localStorage.setItem("level", res.level);
-              localStorage.setItem("auth", res.auth);
+              localStorage.setItem("status", res.auth);
 
               console.log(
                 `usuário ${res.name} logado \n token: ${res.token} \nUserID: ${res.id}`
@@ -88,7 +90,8 @@ function AuthUser() {
       <Link to={"/"}>
         <button
           className="btn btn-dark"
-          style={{ position: "absolute", left: "20px", top: "20px" }}>
+          style={{ position: "absolute", left: "20px", top: "20px" }}
+        >
           <FaArrowLeft />
         </button>
       </Link>

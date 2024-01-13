@@ -1,25 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
+
 import axios from "axios";
-import Nav from "../components/Nav";
 import React, { useEffect, useState } from "react";
-import Notification from "../components/Notification";
-import Style from "./css/MedicPanel.module.css";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
-import PopUp from "../components/PopUp";
+
+import Nav from "../components/Nav";
+import Pop from "../components/Pop";
+import Notification from "../components/Notification";
 
 const MedicPanel = () => {
-  const id = localStorage.getItem("access-uid");
+  const medicid = localStorage.getItem("access-uid");
   const token = localStorage.getItem("access-token");
-  const urlBase = "https://api-connectmed.onrender.com";
-  const showPop = () => {};
-  const closePop = () => {};
+  // const urlBase = "https://api-connectmed.onrender.com";
 
-  var msgConfirmDelete = 'Isto apagará TODOS os dados do paciente e não é reversivel.'
-  var titleDelete = 'Deseja apagar este paciente?'
-  var [data, setData] = useState(undefined);
   var [msg, setMsg] = useState(" ");
   var [title, setTitle] = useState(" ");
+  var [state, setState] = useState(false);
+  var [data, setData] = useState(undefined);
+  var [pacientID, setPacientID] = useState();
 
   function defNotif(msgres, title) {
     setMsg(msgres);
@@ -27,25 +25,61 @@ const MedicPanel = () => {
     setTimeout(() => {
       setMsg(" ");
       setTitle(" ");
-    }, 6000);
+    }, 1200);
   }
 
-  function deletePacient(id) {
-    
+  function deletePacient() {
+    closeModal();
+    axios
+      .post(`http://localhost:5000/pacients/edit/delete`, {
+        id: pacientID,
+        medicid: medicid,
+        token: token,
+      })
+      .then((response) => {
+        let res = response.data;
+        switch (res.status) {
+          case 5:
+            defNotif(res.msg, res.title);
+            break;
+          case 10:
+            List();
+            defNotif(res.msg, res.title);
+            break;
+          default:
+            defNotif("Erro interno", "ERRO");
+            break;
+        }
+      })
+      .catch((err) => defNotif("Erro interno", "ERRO"));
   }
 
+  //? função para fechar o modal
+  function closeModal() {
+    return setState(false);
+  }
+
+  //? abre modal de configuração
+  function confirmDelete(name, id) {
+    setState(true);
+    setPacientID(id);
+  }
+
+  //? recupera todos os pacientes do banco
   function List() {
     axios
-      .post(`${urlBase}/dashboard/listpacients`, { id: id, token: token })
+      .post(`https://api-connectmed.onrender.com/dashboard/listpacients`, {
+        id: medicid,
+        token: token,
+      })
       .then(async (response) => {
-        console.log("teste");
         setData(response.data.pacients);
         switch (response.data.status) {
           case 5:
             defNotif(data.msg, data.title);
             break;
           case 10:
-            defNotif(`Pacientes atualizados: [${data.length}]`, "INFO");
+            defNotif("Pacientes atualizados.", "INFO");
             break;
           default:
             defNotif("Erro interno, contate o suporte.", "ERRO");
@@ -54,6 +88,7 @@ const MedicPanel = () => {
       .catch((err) => console.log(err));
   }
 
+  //? atualiza a lista a cada refresh da página
   useEffect(() => {
     List();
   }, []);
@@ -61,11 +96,22 @@ const MedicPanel = () => {
   return (
     <>
       <Nav />
-      <PopUp msg={msgConfirmDelete} title={titleDelete} showPop={showPop} closePop={closePop} />
       <Notification msg={msg} title={title} />
-      <div 
+      <Pop
+        show={state}
+        defState={closeModal}
+        pacientID={pacientID}
+        deletePacient={deletePacient}
+      />
+      <div
         className="bg-dark"
-        style={{ display: "flex", justifyContent: "center", marginTop: "7em", padding: "10px", borderRadius: "10px" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "5em",
+          padding: "10px",
+          borderRadius: "10px",
+        }}
       >
         <ul
           className="list-group"
@@ -144,7 +190,12 @@ const MedicPanel = () => {
                     className="form-control"
                     value={pacient.desc}
                   />
-                  <button className="btn btn-danger" onClick={deletePacient(pacient.id)} >
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      confirmDelete(pacient.name, pacient._id);
+                    }}
+                  >
                     <FaTrash />
                   </button>
                   <button className="btn btn-success">
