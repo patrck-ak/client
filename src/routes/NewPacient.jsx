@@ -79,7 +79,7 @@ function NewPacient() {
             defNotif(res.msg, res.type);
             break;
           default:
-            defNotif("Erro interno, tente mais tarde.", "ERRO");
+            defNotif("Erro interno, tente mais tarde.", "error");
             break;
         }
       })

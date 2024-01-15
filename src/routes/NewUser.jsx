@@ -56,10 +56,10 @@ function NewUser() {
           console.log(res.status);
           switch (res.status) {
             case 5:
-              defNotif(res.msg, res.title);
+              defNotif(res.msg, res.type);
               break;
             case 10:
-              defNotif(res.msg, res.title);
+              defNotif(res.msg, res.type);
               break;
             default:
               defNotif("Erro interno, tente mais tarde.", "ERRO");

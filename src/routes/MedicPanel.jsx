@@ -42,11 +42,11 @@ const MedicPanel = () => {
         let res = response.data;
         switch (res.status) {
           case 5:
-            defNotif(res.msg);
+            defNotif(res.msg, res.type);
             break;
           case 10:
             List();
-            defNotif(res.msg);
+            defNotif(res.msg, res.type);
             break;
           default:
             defNotif("Erro interno");
