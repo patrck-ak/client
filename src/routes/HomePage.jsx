@@ -16,43 +16,18 @@ function HomePage() {
   }
 
   var res;
-  var resStatus = false;
-  var [status, setStatus] = useState("OFFLINE");
   var [cpf, setCpf] = useState();
   var [msg, setMsg] = useState(" ");
-  var [title, setTitle] = useState(" ");
+  var [type, setType] = useState(" ");
 
-  function defNotif(msgres, title) {
+  function defNotif(msgres, type) {
     setMsg(msgres);
-    setTitle(title);
+    setType(type);
     setTimeout(() => {
       setMsg(" ");
-      setTitle(" ");
+      setType(" ");
     }, 6000);
   }
-
-  function awakeAPI() {
-    axios
-      .post(`${urlBase}/awake`, {
-        awake: "awake",
-      })
-      .then((response) => {
-        resStatus = response.data;
-        switch (resStatus.msg) {
-          case "true":
-            setStatus("ONLINE");
-            break;
-          default:
-            setStatus("INICIANDO...");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setStatus("OFFLINE");
-      });
-  }
-
-  useEffect(() => awakeAPI(), []);
 
   function CheckCpf(e) {
     e.preventDefault();
@@ -64,10 +39,10 @@ function HomePage() {
         res = response.data;
         switch (res.status) {
           case 5:
-            defNotif(res.msg, res.title);
+            defNotif(res.msg);
             break;
           case 10:
-            defNotif(res.msg, res.title);
+            defNotif(res.msg);
             break;
           default:
         }
@@ -77,7 +52,7 @@ function HomePage() {
 
   return (
     <>
-      <Notification msg={msg} title={title} />
+      <Notification msg={msg} type={type} />
       <Link to={"/auth"}>
         <button
           className="btn btn-dark"
@@ -87,22 +62,6 @@ function HomePage() {
           <FaUserMd />
         </button>
       </Link>
-
-      <div
-        className="input-group"
-        style={{ display: "flex", justifyContent: "center", top: "20px" }}
-      >
-        <input
-          type="text"
-          title="Status do backend"
-          className="input-group-text"
-          disabled
-          value={status}
-        />
-        <button title="Iniciar" className="btn btn-dark" onClick={awakeAPI}>
-          <FaServer />
-        </button>
-      </div>
 
       <div className={Style.formContainer}>
         <form className={Style.form}>

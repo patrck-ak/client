@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
 import Pop from "../components/Pop";
@@ -11,27 +12,28 @@ import Notification from "../components/Notification";
 const MedicPanel = () => {
   const medicid = localStorage.getItem("access-uid");
   const token = localStorage.getItem("access-token");
-  // const urlBase = "https://api-connectmed.onrender.com";
+  const urlBase = "https://api-connectmed.onrender.com";
+  const nav = useNavigate();
 
   var [msg, setMsg] = useState(" ");
-  var [title, setTitle] = useState(" ");
+  var [type, setType] = useState(" ");
   var [state, setState] = useState(false);
   var [data, setData] = useState(undefined);
   var [pacientID, setPacientID] = useState();
 
-  function defNotif(msgres, title) {
+  function defNotif(msgres, type) {
     setMsg(msgres);
-    setTitle(title);
+    setType(type);
     setTimeout(() => {
       setMsg(" ");
-      setTitle(" ");
+      setType(" ");
     }, 1200);
   }
 
   function deletePacient() {
     closeModal();
     axios
-      .post(`http://localhost:5000/pacients/edit/delete`, {
+      .post(`${urlBase}/pacients/edit/delete`, {
         id: pacientID,
         medicid: medicid,
         token: token,
@@ -40,18 +42,18 @@ const MedicPanel = () => {
         let res = response.data;
         switch (res.status) {
           case 5:
-            defNotif(res.msg, res.title);
+            defNotif(res.msg);
             break;
           case 10:
             List();
-            defNotif(res.msg, res.title);
+            defNotif(res.msg);
             break;
           default:
-            defNotif("Erro interno", "ERRO");
+            defNotif("Erro interno");
             break;
         }
       })
-      .catch((err) => defNotif("Erro interno", "ERRO"));
+      .catch((err) => defNotif("Erro interno"));
   }
 
   //? função para fechar o modal
@@ -68,7 +70,7 @@ const MedicPanel = () => {
   //? recupera todos os pacientes do banco
   function List() {
     axios
-      .post(`https://api-connectmed.onrender.com/dashboard/listpacients`, {
+      .post(`${urlBase}/dashboard/listpacients`, {
         id: medicid,
         token: token,
       })
@@ -76,16 +78,16 @@ const MedicPanel = () => {
         setData(response.data.pacients);
         switch (response.data.status) {
           case 5:
-            defNotif(data.msg, data.title);
+            defNotif(data.msg);
             break;
           case 10:
-            defNotif("Pacientes atualizados.", "INFO");
+            defNotif("Pacientes atualizados.");
             break;
           default:
-            defNotif("Erro interno, contate o suporte.", "ERRO");
+            defNotif("Erro interno, contate o suporte.");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => defNotif("Erro ao enviar request."));
   }
 
   //? atualiza a lista a cada refresh da página
@@ -96,7 +98,7 @@ const MedicPanel = () => {
   return (
     <>
       <Nav />
-      <Notification msg={msg} title={title} />
+      <Notification msg={msg} type={type} />
       <Pop
         show={state}
         defState={closeModal}
@@ -198,7 +200,12 @@ const MedicPanel = () => {
                   >
                     <FaTrash />
                   </button>
-                  <button className="btn btn-success">
+                  <button
+                    className="btn btn-primary "
+                    onClick={() => {
+                      nav(`/pacient/edit/${pacient._id}`);
+                    }}
+                  >
                     <FaPencilAlt />
                   </button>
                 </div>

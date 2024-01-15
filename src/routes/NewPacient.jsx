@@ -17,13 +17,12 @@ import Notification from "../components/Notification";
 import { MdEmail } from "react-icons/md";
 
 function NewPacient() {
-
   var nameAdmin = localStorage.getItem("name");
   var idAdmin = localStorage.getItem("uid");
 
   // variavel de notificação
   var [msg, setMsg] = useState(" ");
-  var [title, setTitle] = useState(" ");
+  var [type, setType] = useState(" ");
 
   // dados medico
   const [pass, setPass] = useState();
@@ -31,33 +30,33 @@ function NewPacient() {
   // dados do paciente
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const [address, setAddress] = useState();
-  const [desc, setDesc] = useState();
+  const [address, setAddress] = useState("-/-");
+  const [desc, setDesc] = useState("-/-");
   var [cpf, setCpf] = useState(0);
   var urlBase = "https://api-connectmed.onrender.com/pacients/create";
   var res;
 
-  var [load, setLoad] = useState(true)
+  var [load, setLoad] = useState(true);
 
   function loadBtn() {
-    setLoad(false)
+    setLoad(false);
     setTimeout(() => {
-      setLoad(true)
+      setLoad(true);
     }, 2000);
   }
 
-  function defNotif(msgres, title) {
+  function defNotif(msgres, type) {
     setMsg(msgres);
-    setTitle(title);
+    setType(type);
     setTimeout(() => {
       setMsg(" ");
-      setTitle(" ");
+      setType(" ");
     }, 6000);
   }
 
   function createPacient(e) {
     e.preventDefault();
-    loadBtn()
+    loadBtn();
     axios
       .post(urlBase, {
         nam: name,
@@ -74,13 +73,13 @@ function NewPacient() {
         console.log(res.status);
         switch (res.status) {
           case 5:
-            defNotif(res.msg, res.title);
+            defNotif(res.msg, res.type);
             break;
           case 10:
-            defNotif(res.msg, res.title);
+            defNotif(res.msg, res.type);
             break;
           default:
-            defNotif('Erro interno, tente mais tarde.', 'ERRO')
+            defNotif("Erro interno, tente mais tarde.", "ERRO");
             break;
         }
       })
@@ -90,7 +89,7 @@ function NewPacient() {
   return (
     <div className={Style.bodyContainer}>
       <Nav />
-      <Notification msg={msg} title={title}/>
+      <Notification msg={msg} type={type} />
       <form className={Style.formContainer}>
         <div className={Style.Container}>
           <div className="input-group mb-2 mt-4">
@@ -140,6 +139,7 @@ function NewPacient() {
               onChange={(e) => setAddress(e.target.value)}
               className="form-control"
               placeholder="Endereço"
+              defaultValue={address}
             />
           </div>
           <div className="form-group text-bg-dark mt-3">
@@ -148,6 +148,7 @@ function NewPacient() {
               className="form-control mt-1"
               id="desc"
               rows="6"
+              defaultValue={desc}
               onChange={(e) => setDesc(e.target.value)}
             ></textarea>
           </div>
@@ -185,7 +186,11 @@ function NewPacient() {
               className="btn btn-success mt-5"
               onClick={(e) => createPacient(e)}
             >
-            <span className="spinner-border spinner-border-sm" style={{marginRight: '5px'}} hidden={load}></span>
+              <span
+                className="spinner-border spinner-border-sm"
+                style={{ marginRight: "5px" }}
+                hidden={load}
+              ></span>
               Enviar Prontuário
             </button>
 

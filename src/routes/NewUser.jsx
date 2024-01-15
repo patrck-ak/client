@@ -7,28 +7,28 @@ import Nav from "../components/Nav";
 import Notification from "../components/Notification";
 
 function NewUser() {
-  const adminLevel = localStorage.getItem('level');
-  var [load, setLoad] = useState(true)
+  const adminLevel = localStorage.getItem("level");
+  var [load, setLoad] = useState(true);
 
   function loadIco() {
-    setLoad(false)
+    setLoad(false);
     setTimeout(() => {
-      setLoad(true)
+      setLoad(true);
     }, 2000);
   }
 
-  function defNotif(msgres, title) {
+  function defNotif(msgres, type) {
     setMsg(msgres);
-    setTitle(title);
+    setType(type);
     setTimeout(() => {
       setMsg(" ");
-      setTitle(" ");
-    }, 6000);
+      setType(" ");
+    }, 1200);
   }
 
   // variavel de notificação
   var [msg, setMsg] = useState(" ");
-  var [title, setTitle] = useState(" ");
+  var [type, setType] = useState(" ");
   var res;
 
   var [level, setLevel] = useState(0);
@@ -41,10 +41,16 @@ function NewUser() {
 
   const regUser = (e) => {
     e.preventDefault();
-    loadIco()
+    loadIco();
     if (pass === confirm) {
       axios
-        .post(urlBase, { name: name, email: email, pass: pass, level: level, adminLevel: adminLevel })
+        .post(urlBase, {
+          name: name,
+          email: email,
+          pass: pass,
+          level: level,
+          adminLevel: adminLevel,
+        })
         .then((response) => {
           res = response.data;
           console.log(res.status);
@@ -56,7 +62,7 @@ function NewUser() {
               defNotif(res.msg, res.title);
               break;
             default:
-              defNotif('Erro interno, tente mais tarde.', 'ERRO')
+              defNotif("Erro interno, tente mais tarde.", "ERRO");
               break;
           }
         }) //! finalizar sistema de envio de log
@@ -71,7 +77,7 @@ function NewUser() {
   return (
     <>
       <Nav />
-      <Notification msg={msg} title={title}/>
+      <Notification msg={msg} type={type} />
       <div className={Style.wrap}>
         <form className="m-auto">
           <h4 className="text-light text-center">Registrar novo usuário</h4>
@@ -143,8 +149,13 @@ function NewUser() {
           <button
             type="submit"
             className="btn btn-success"
-            onClick={(e) => regUser(e)}>
-            <span className="spinner-border spinner-border-sm" hidden={load}></span>  Cadastrar
+            onClick={(e) => regUser(e)}
+          >
+            <span
+              className="spinner-border spinner-border-sm"
+              hidden={load}
+            ></span>{" "}
+            Cadastrar
           </button>
         </form>
       </div>

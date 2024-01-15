@@ -1,7 +1,6 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import Slide from "@mui/material/Slide";
-import { FaBell } from "react-icons/fa";
 
 function Notification({ msg, title }) {
   function Transition(props) {

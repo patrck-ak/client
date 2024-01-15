@@ -17,7 +17,7 @@ function AuthUser() {
   }
 
   var [msg, setMsg] = useState(" ");
-  var [title, setTitle] = useState(" ");
+  var [type, setType] = useState(" ");
   var [load, setLoad] = useState(true);
   const [nameInput, setName] = useState();
   const [passInput, setPass] = useState();
@@ -30,13 +30,13 @@ function AuthUser() {
     }, 1200);
   }
 
-  function defNotif(msgres, title) {
+  function defNotif(msgres, type) {
     setMsg(msgres);
-    setTitle(title);
+    setType(type);
     setTimeout(() => {
       setMsg(" ");
-      setTitle(" ");
-    }, 3000);
+      setType(" ");
+    }, 1200);
   }
 
   const authUser = (e) => {
@@ -53,7 +53,7 @@ function AuthUser() {
           //* verifica se foi logado
           switch (res.status) {
             case 5:
-              defNotif(res.msg, res.title);
+              defNotif(res.msg, res.type);
               break;
 
             case 10:
@@ -85,7 +85,7 @@ function AuthUser() {
 
   return (
     <div>
-      <Notification msg={msg} title={title} />
+      <Notification msg={msg} type={type} />
 
       <Link to={"/"}>
         <button

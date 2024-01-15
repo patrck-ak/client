@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
 import ErrorHandler from "./routes/ErrorHandler";
 import axios from "axios";
+import EditPacient from "./routes/EditPacient";
 
 const token = localStorage.getItem("access-token");
 
@@ -34,8 +35,12 @@ const router = createBrowserRouter([
         element: <MedicPanel />,
       },
       {
-        path: "/pacients/new",
+        path: "/pacient/new",
         element: <NewPacient />,
+      },
+      {
+        path: "/pacient/edit/:id",
+        element: <EditPacient />,
       },
       {
         path: "/user/register",
