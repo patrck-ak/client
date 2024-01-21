@@ -17,8 +17,9 @@ import Notification from "../components/Notification";
 import { MdEmail } from "react-icons/md";
 
 function NewPacient() {
-  var nameAdmin = localStorage.getItem("name");
-  var idAdmin = localStorage.getItem("uid");
+  //! precisa refatorar
+  const storage = sessionStorage.getItem("data");
+  const data = JSON.parse(storage);
 
   // variavel de notificação
   var [msg, setMsg] = useState(" ");
@@ -65,8 +66,8 @@ function NewPacient() {
         desc: desc,
         cpf: cpf,
         pass: pass,
-        admin: nameAdmin,
-        idadmin: idAdmin,
+        admin: data.name,
+        idadmin: data.id,
       })
       .then((response) => {
         res = response.data;
@@ -161,7 +162,7 @@ function NewPacient() {
             </span>
             <input
               type="text"
-              value={nameAdmin}
+              value={data.name}
               disabled
               onChange={(e) => setName(e.target.value)}
               className="form-control"

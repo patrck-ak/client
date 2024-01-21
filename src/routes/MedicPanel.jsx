@@ -10,8 +10,10 @@ import Pop from "../components/Pop";
 import Notification from "../components/Notification";
 
 const MedicPanel = () => {
-  const medicid = localStorage.getItem("access-uid");
-  const token = localStorage.getItem("access-token");
+  //! precisa refatorar
+  const storage = sessionStorage.getItem("data");
+  const storagedata = JSON.parse(storage);
+
   const urlBase = "https://api-connectmed.onrender.com";
   const nav = useNavigate();
 
@@ -35,8 +37,8 @@ const MedicPanel = () => {
     axios
       .post(`${urlBase}/pacients/edit/delete`, {
         id: pacientID,
-        medicid: medicid,
-        token: token,
+        medicid: storagedata.id,
+        token: storagedata.token,
       })
       .then((response) => {
         let res = response.data;
@@ -71,8 +73,8 @@ const MedicPanel = () => {
   function List() {
     axios
       .post(`${urlBase}/dashboard/listpacients`, {
-        id: medicid,
-        token: token,
+        id: storagedata.id,
+        token: storagedata.token,
       })
       .then(async (response) => {
         setData(response.data.pacients);

@@ -7,9 +7,10 @@ import Nav from "../components/Nav";
 import Notification from "../components/Notification";
 
 function NewUser() {
-  const adminLevel = localStorage.getItem("level");
-  var [load, setLoad] = useState(true);
+  const storage = sessionStorage.getItem("data");
+  const data = JSON.parse(storage);
 
+  var [load, setLoad] = useState(true);
   function loadIco() {
     setLoad(false);
     setTimeout(() => {
@@ -49,7 +50,7 @@ function NewUser() {
           email: email,
           pass: pass,
           level: level,
-          adminLevel: adminLevel,
+          adminLevel: data.level,
         })
         .then((response) => {
           res = response.data;

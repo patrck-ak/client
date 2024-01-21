@@ -1,23 +1,17 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import Slide from "@mui/material/Slide";
+import { Alert } from "@mui/material";
 
-function Notification({ msg, title }) {
-  function Transition(props) {
-    return <Slide {...props} direction="up" />;
-  }
-
+function Notification({ msg, type }) {
   return (
     <>
       {msg === " " ? (
         <></>
       ) : (
         <>
-          <Snackbar
-            TransitionComponent={Transition}
-            open={true}
-            message={msg}
-          />
+          <Snackbar open={true}>
+            <Alert severity={type}>{msg}</Alert>
+          </Snackbar>
         </>
       )}
     </>

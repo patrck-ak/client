@@ -2,29 +2,31 @@
 import React, { useEffect } from "react";
 import Nav from "../components/Nav";
 import axios from "axios";
-import Style from './css/EditUser.module.css'
+import Style from "./css/EditUser.module.css";
 
 function EditUser() {
   const urlBase = "https://api-connectmed.onrender.com/user/edit/";
-  const name = localStorage.getItem("name");
-  const id = localStorage.getItem("access-uid");
-  const token = localStorage.getItem("access-token");
+
+  const storage = sessionStorage.getItem("data");
+  const data = JSON.parse(storage);
+
   var res;
 
   const getUser = () => {
-    axios.post(urlBase, {
-        nam: name, 
-        id: id, 
-        token: token
+    axios
+      .post(urlBase, {
+        nam: data.name,
+        id: data.id,
+        token: data.token,
       })
-    .then(async (response) => {
-      res = response.data;
-    })
-    .catch((err) => console.log(err));
-  }
+      .then(async (response) => {
+        res = response.data;
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    getUser()
+    getUser();
   }, []);
 
   return (
@@ -32,7 +34,7 @@ function EditUser() {
       <Nav />
       <div className={Style.formContainer}></div>
       <form className={Style.form}>
-      <p>{res}</p>
+        <p>{res}</p>
       </form>
     </>
   );

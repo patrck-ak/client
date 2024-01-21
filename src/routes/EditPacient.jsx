@@ -1,24 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { FaArrowLeft, FaUser } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Nav from "../components/Nav";
-import { FaUser } from "react-icons/fa";
 import axios from "axios";
-import { InputMask } from "@react-input/mask";
 
 function EditPacient() {
-  const urlBase = "http://localhost:5000";
-  const medicid = localStorage.getItem("access-uid");
-  const medictoken = localStorage.getItem("access-token");
   var [data, setData] = useState([]);
+  var update = [];
 
-  const notFound = [
-    {
-      data: {
-        name: "Usuário não existe",
-      },
-    },
-  ];
+  const storage = sessionStorage.getItem("data");
+  const dataStorage = JSON.parse(storage);
+
+  //! precisa refatorar
+  const urlBase = "http://localhost:5000";
+  const notFound = [{ data: { name: "Usuário não existe" } }];
+
+  async function updateReq(e) {
+    e.preventDefault();
+    axios
+      .patch(`${urlBase}/update/pacient`, {
+        update: update,
+        medicid: dataStorage.id,
+        medictoken: dataStorage.token,
+      })
+      .then((response) => {
+        switch (response.data.status) {
+          case 5:
+            console.log("err");
+            break;
+          case 10:
+            console.log("suc");
+            break;
+          default:
+            console.log("err int");
+        }
+      });
+  }
 
   let { id } = useParams();
 
@@ -26,8 +44,8 @@ function EditPacient() {
     axios
       .post(`${urlBase}/getpacient`, {
         id: id,
-        medicid: medicid,
-        medictoken: medictoken,
+        medicid: dataStorage.id,
+        medictoken: dataStorage.token,
       })
       .then((res) => {
         switch (res.data.status) {
@@ -88,13 +106,7 @@ function EditPacient() {
           <span className="input-group-text" id="basic-addon1">
             <FaUser />
           </span>
-          <InputMask
-            defaultValue={data.cpf}
-            mask={"___.___.___-__"}
-            replacement={"_"}
-            type="text"
-            className="form-control"
-          />
+          <input defaultValue={data.cpf} type="text" className="form-control" />
         </div>
         <div className="input-group mb-2 ">
           <span className="input-group-text" id="basic-addon1">
@@ -117,7 +129,14 @@ function EditPacient() {
           />
         </div>
         <div className="button-group">
-          <button className="btn btn-success">Atualizar cadastro</button>
+          <Link to="/dashboard">
+            <button className="btn btn-primary" style={{ marginRight: "10px" }}>
+              <FaArrowLeft />
+            </button>
+          </Link>
+          <button className="btn btn-success" onClick={(e) => updateReq(e)}>
+            Atualizar cadastro
+          </button>
         </div>
       </form>
     </>

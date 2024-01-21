@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Style from "./css/HomePage.module.css";
-import { FaUser, FaUserMd, FaServer } from "react-icons/fa";
+import { FaUser, FaUserMd } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { InputMask } from "@react-input/mask";
@@ -9,9 +9,12 @@ import Notification from "../components/Notification";
 import axios from "axios";
 
 function HomePage() {
+  //! precisa refatorar
+  const storage = sessionStorage.getItem("data");
+  const data = JSON.parse(storage);
+
   const urlBase = "https://api-connectmed.onrender.com";
-  const isAuth = localStorage.getItem("status");
-  if (isAuth === "true") {
+  if (data.status === "true") {
     window.location.href = "/dashboard";
   }
 
@@ -26,7 +29,7 @@ function HomePage() {
     setTimeout(() => {
       setMsg(" ");
       setType(" ");
-    }, 6000);
+    }, 1200);
   }
 
   function CheckCpf(e) {
