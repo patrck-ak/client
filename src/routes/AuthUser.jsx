@@ -7,15 +7,18 @@ import { FaArrowLeft, FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function AuthUser() {
+  var data;
   const navigate = useNavigate();
   const urlBase = "https://api-connectmed.onrender.com/auth/user";
-
   const storage = sessionStorage.getItem("data");
-  const data = JSON.parse(storage);
-
-  if (data.status === "true") {
-    console.log("valido");
-    navigate("/dashboard");
+  if (!storage) {
+    console.log("nenhum dado encontrado...");
+  } else {
+    data = JSON.parse(storage);
+    if (data.status) {
+      console.log("valido");
+      navigate("/dashboard");
+    }
   }
 
   var [msg, setMsg] = useState(" ");
@@ -63,18 +66,20 @@ function AuthUser() {
               const data = {
                 token: res.token,
                 id: res.id,
-                "name:": res.name,
-                "status:": res.auth,
+                name: res.name,
+                status: res.auth,
               };
 
               const stg = JSON.stringify(data);
               sessionStorage.setItem("data", stg);
 
+              console.log(data);
+              console.log(stg);
               console.log(
                 `usuário ${res.name} logado \n token: ${res.token} \nUserID: ${res.id}`
               );
               //* redireciona para home do app
-              window.location.href = "/dashboard";
+              navigate("/dashboard");
               break;
 
             default:

@@ -2,26 +2,31 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { FaPencilAlt, FaTrash, FaFileMedicalAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { FaArrowRotateRight } from "react-icons/fa6";
 
 import Nav from "../components/Nav";
 import Pop from "../components/Pop";
 import Notification from "../components/Notification";
 
 const MedicPanel = () => {
-  //! precisa refatorar
+  const nav = useNavigate();
   const storage = sessionStorage.getItem("data");
+  if (!storage) {
+    nav("");
+  }
   const storagedata = JSON.parse(storage);
 
+  // const urlBase = "http://localhost:5000";
   const urlBase = "https://api-connectmed.onrender.com";
-  const nav = useNavigate();
 
   var [msg, setMsg] = useState(" ");
   var [type, setType] = useState(" ");
   var [state, setState] = useState(false);
   var [data, setData] = useState(undefined);
   var [pacientID, setPacientID] = useState();
+  var [search, setSearch] = useState(undefined);
 
   function defNotif(msgres, type) {
     setMsg(msgres);
@@ -70,11 +75,13 @@ const MedicPanel = () => {
   }
 
   //? recupera todos os pacientes do banco
-  function List() {
+  function List(pacientName) {
+    console.log(pacientName);
     axios
       .post(`${urlBase}/dashboard/listpacients`, {
         id: storagedata.id,
         token: storagedata.token,
+        pacientName: pacientName,
       })
       .then(async (response) => {
         setData(response.data.pacients);
@@ -83,13 +90,13 @@ const MedicPanel = () => {
             defNotif(data.msg);
             break;
           case 10:
-            defNotif("Pacientes atualizados.");
+            defNotif("Pacientes atualizados.", "success");
             break;
           default:
-            defNotif("Erro interno, contate o suporte.");
+            defNotif("Erro interno, contate o suporte.", "error");
         }
       })
-      .catch((err) => defNotif("Erro ao enviar request."));
+      .catch((err) => defNotif("Erro ao enviar request.", "error"));
   }
 
   //? atualiza a lista a cada refresh da página
@@ -107,58 +114,53 @@ const MedicPanel = () => {
         pacientID={pacientID}
         deletePacient={deletePacient}
       />
+
+      <div className="d-flex" style={{ marginTop: "5em" }}>
+        <div
+          className="input-group "
+          style={{ width: "30%", position: "relative" }}
+        >
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Filtrar por nome"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            onBlur={() => List(search)}
+          />
+        </div>
+        <button
+          style={{ marginLeft: "10px" }}
+          className="btn btn-success"
+          title="Atualizar pacientes"
+          onClick={() => List()}
+        >
+          <FaArrowRotateRight />
+        </button>
+      </div>
+
       <div
         className="bg-dark"
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "5em",
           padding: "10px",
+          marginTop: "1em",
           borderRadius: "10px",
         }}
       >
         <ul
           className="list-group"
-          style={{ width: "80%", position: "inherit" }}
+          style={{ width: "90%", position: "inherit" }}
         >
-          <li className="mt-1 list-group-item bg-dark border-dark">
-            <div
-              className="input-group d-flex justify-content-evenly bg-dark border-dark "
-              style={{ marginTop: "-10px" }}
-            >
-              <p
-                className="input-group-text bg-transparent border-0 text-bg-dark"
-                style={{ marginLeft: "-5vw", marginBottom: "-15px" }}
-              >
-                NOME
-              </p>
-              <p
-                className="input-group-text bg-transparent border-0 text-bg-dark"
-                style={{ marginBottom: "-15px" }}
-              >
-                CPF
-              </p>
-              <p
-                className="input-group-text bg-transparent border-0 text-bg-dark"
-                style={{ marginBottom: "-15px" }}
-              >
-                ENDEREÇO
-              </p>
-              <p
-                className="input-group-text bg-transparent border-0 text-bg-dark"
-                style={{ marginBottom: "-15px" }}
-              >
-                DESCRIÇÃO
-              </p>
-            </div>
-          </li>
           {data === undefined ? (
             <li className="list-group-item bg-dark border-dark">
               <div className="input-group m-auto">
                 <input
                   type="text"
                   readOnly
-                  className="form-control text-center "
+                  className="form-control text-center"
                   value="CARREGANDO..."
                 />
               </div>
@@ -168,6 +170,7 @@ const MedicPanel = () => {
               <li
                 className="list-group-item bg-dark border-dark"
                 key={pacient.name}
+                onClick={() => console.log(pacient)}
               >
                 <div className="input-group m-auto">
                   <input
@@ -192,9 +195,16 @@ const MedicPanel = () => {
                     type="text"
                     readOnly
                     className="form-control"
+                    value={pacient.email}
+                  />
+                  <input
+                    type="text"
+                    readOnly
+                    className="form-control"
                     value={pacient.desc}
                   />
                   <button
+                    title="Apagar paciente"
                     className="btn btn-danger"
                     onClick={() => {
                       confirmDelete(pacient.name, pacient._id);
@@ -203,12 +213,16 @@ const MedicPanel = () => {
                     <FaTrash />
                   </button>
                   <button
-                    className="btn btn-primary "
+                    title="Editar paciente"
+                    className="btn btn-secondary "
                     onClick={() => {
                       nav(`/pacient/edit/${pacient._id}`);
                     }}
                   >
                     <FaPencilAlt />
+                  </button>
+                  <button title="Nova consulta" className="btn btn-primary">
+                    <FaFileMedicalAlt />
                   </button>
                 </div>
               </li>

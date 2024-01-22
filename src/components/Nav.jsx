@@ -1,30 +1,28 @@
 import Style from "./css/Nav.module.css";
 import { Link } from "react-router-dom";
-import {
-  FaHome,
-  FaSearch,
-  FaUserCircle,
-  FaUserCog,
-  FaUserMd,
-  FaUserPlus,
-} from "react-icons/fa";
+import { FaHome, FaUserCircle, FaUserCog, FaUserPlus } from "react-icons/fa";
 import CheckAuth from "./CheckAuth";
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
   CheckAuth();
   var nam;
 
-  const storage = localStorage.getItem("data");
-  const data = JSON.parse(storage);
+  const nav = useNavigate();
 
-  // Deixar a primeira letra do nome em Uppercase
-  if (data.name !== null) {
-    nam = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+  const storage = sessionStorage.getItem("data");
+  if (storage === undefined || storage === null) {
+    console.log("dados não encontrados.");
+  } else {
+    const data = JSON.parse(storage);
+    if (data.name !== null) {
+      nam = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+    }
   }
 
   function LogOut() {
-    localStorage.clear();
-    window.location.href = "/";
+    sessionStorage.clear();
+    nav("/");
   }
 
   return (
@@ -33,35 +31,14 @@ function Nav() {
         <ul className={Style.NavList}>
           <li className={Style.LinkCont}>
             <Link className={Style.Link} to="/dashboard">
-              {" "}
-              <FaHome className="mb-1" /> Dashboard{" "}
-            </Link>
-            <Link className={Style.Link} to="/pacient/consult">
-              {" "}
-              <FaUserMd className="mb-1" /> Nova Consulta{" "}
+              <FaHome className="mb-1" /> Dashboard
             </Link>
             <Link className={Style.Link} to="/pacient/new">
-              {" "}
-              <FaUserPlus className="mb-1" /> Novo Paciente{" "}
+              <FaUserPlus className="mb-1" /> Novo Paciente
             </Link>
             <Link className={Style.Link} to="/user/register">
-              {" "}
-              <FaUserCog className="mb-1" /> Novo Usuário{" "}
+              <FaUserCog className="mb-1" /> Novo Usuário
             </Link>
-          </li>
-
-          <li className={Style.SearchCont}>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Procurar paciente"
-              />
-              <button className="btn btn-light" type="button">
-                {" "}
-                <FaSearch />{" "}
-              </button>
-            </div>
           </li>
 
           <li className={Style.UserCont}>
@@ -80,12 +57,10 @@ function Nav() {
               aria-labelledby="dropdownMenuButton2"
             >
               <Link className="dropdown-item" to={"/user/edit/"}>
-                {" "}
-                Editar usuário{" "}
+                Editar usuário
               </Link>
               <hr className="dropdown-divider" />
               <Link className="dropdown-item" to="#" onClick={LogOut}>
-                {" "}
                 Finaliza Sessão
               </Link>
             </ul>

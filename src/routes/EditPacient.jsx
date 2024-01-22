@@ -12,7 +12,6 @@ function EditPacient() {
   const storage = sessionStorage.getItem("data");
   const dataStorage = JSON.parse(storage);
 
-  //! precisa refatorar
   const urlBase = "http://localhost:5000";
   const notFound = [{ data: { name: "Usuário não existe" } }];
 

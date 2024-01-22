@@ -1,27 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./css/HomePage.module.css";
 import { FaUser, FaUserMd } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { InputMask } from "@react-input/mask";
+import { useNavigate } from "react-router-dom";
 import Notification from "../components/Notification";
 import axios from "axios";
 
 function HomePage() {
-  //! precisa refatorar
-  const storage = sessionStorage.getItem("data");
-  const data = JSON.parse(storage);
-
+  const nav = useNavigate();
   const urlBase = "https://api-connectmed.onrender.com";
-  if (data.status === "true") {
-    window.location.href = "/dashboard";
-  }
 
   var res;
   var [cpf, setCpf] = useState();
   var [msg, setMsg] = useState(" ");
   var [type, setType] = useState(" ");
+
+  useEffect(() => {
+    const storage = sessionStorage.getItem("data");
+    if (!storage) {
+      defNotif("Nenhum usuário encontrado", "info");
+    } else {
+      const data = JSON.parse(storage);
+      if (data.status === true) {
+        defNotif("Usuário encontrado. Iniciando sessão", "success");
+        setTimeout(() => {
+          nav("/dashboard");
+        }, 4000);
+      }
+    }
+  }, []);
 
   function defNotif(msgres, type) {
     setMsg(msgres);

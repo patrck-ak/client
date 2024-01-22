@@ -1,4 +1,3 @@
-
 .NavList {
   top: 0;
   left: 0;
@@ -18,12 +17,6 @@
   color: aliceblue;
   list-style: none;
   margin-left: 30px;
-}
-
-.SearchCont {
-  justify-self: end;
-  color: #f0f8ff;
-  list-style: none;
 }
 
 .UserCont {
@@ -50,17 +43,20 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-} .Link:hover {
+}
+.Link:hover {
   color: rgb(170, 170, 170);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-} .Link:first-child {
+}
+.Link:first-child {
   margin-left: 5px;
-} .Link::after {
-  content: '';
+}
+.Link::after {
+  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -74,7 +70,8 @@
   -moz-transition: transform 0.35s ease-out;
   -ms-transition: transform 0.35s ease-out;
   -o-transition: transform 0.35s ease-out;
-} .Link:hover::after {
+}
+.Link:hover::after {
   transform: scaleX(1);
   transform-origin: bottom center;
 }
