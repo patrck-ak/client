@@ -14,7 +14,7 @@ const MedicPanel = () => {
   const nav = useNavigate();
   const storage = sessionStorage.getItem("data");
   if (!storage) {
-    nav("");
+    nav("/");
   }
   const storagedata = JSON.parse(storage);
 

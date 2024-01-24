@@ -11,16 +11,11 @@ import EditUser from "./routes/EditUser";
 import HomePage from "./routes/HomePage";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
-// import ErrorHandler from "./routes/ErrorHandler";
-import axios from "axios";
 import EditPacient from "./routes/EditPacient";
-
-const token = localStorage.getItem("access-token");
 
 const router = createBrowserRouter([
   {
     element: <App />,
-    // errorElement: <ErrorHandler />,
     children: [
       {
         path: "/",
@@ -53,10 +48,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-axios.defaults.headers.common = {
-  Authorization: "Bearer " + token,
-};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

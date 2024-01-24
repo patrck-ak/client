@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FaArrowLeft, FaUser } from "react-icons/fa";
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import Nav from "../components/Nav";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FaArrowLeft, FaUser } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Nav from "../components/Nav";
 
 function EditPacient() {
-  var [data, setData] = useState([]);
-  var update = [];
+  let { id } = useParams();
 
+  const nav = useNavigate();
   const storage = sessionStorage.getItem("data");
+  if (!storage) {
+    nav("/");
+  }
   const dataStorage = JSON.parse(storage);
 
   const urlBase = "http://localhost:5000";
@@ -19,9 +22,14 @@ function EditPacient() {
     e.preventDefault();
     axios
       .patch(`${urlBase}/update/pacient`, {
-        update: update,
+        name: uName,
+        desc: uDesc,
+        email: uMail,
+        cpf: uCpf,
+        addr: uAddr,
         medicid: dataStorage.id,
         medictoken: dataStorage.token,
+        id: data._id,
       })
       .then((response) => {
         switch (response.data.status) {
@@ -37,8 +45,14 @@ function EditPacient() {
       });
   }
 
-  let { id } = useParams();
+  var [data, setData] = useState([]);
+  var [uName, setuName] = useState(data.name);
+  var [uMail, setuMail] = useState(data.email);
+  var [uDesc, setuDesc] = useState(data.desc);
+  var [uCpf, setuCpf] = useState(data.cpf);
+  var [uAddr, setuAddr] = useState(data.addr);
 
+  // lista os dados do paciente
   async function getPacient() {
     axios
       .post(`${urlBase}/getpacient`, {
@@ -89,6 +103,7 @@ function EditPacient() {
             type="text"
             defaultValue={data.name}
             className="form-control"
+            onChange={(e) => setuName(e.target.value)}
           />
         </div>
         <div className="input-group mb-2 ">
@@ -99,13 +114,19 @@ function EditPacient() {
             type="text"
             defaultValue={data.email}
             className="form-control"
+            onChange={(e) => setuMail(e.target.value)}
           />
         </div>
         <div className="input-group mb-2 ">
           <span className="input-group-text" id="basic-addon1">
             <FaUser />
           </span>
-          <input defaultValue={data.cpf} type="text" className="form-control" />
+          <input
+            defaultValue={data.cpf}
+            type="text"
+            className="form-control"
+            onChange={(e) => setuCpf(e.target.value)}
+          />
         </div>
         <div className="input-group mb-2 ">
           <span className="input-group-text" id="basic-addon1">
@@ -115,6 +136,7 @@ function EditPacient() {
             type="text"
             defaultValue={data.addr}
             className="form-control"
+            onChange={(e) => setuAddr(e.target.value)}
           />
         </div>
         <div className="input-group mb-2 ">
@@ -125,6 +147,7 @@ function EditPacient() {
             rows={3}
             defaultValue={data.desc}
             className="form-control"
+            onChange={(e) => setuDesc(e.target.value)}
           />
         </div>
         <div className="button-group">
