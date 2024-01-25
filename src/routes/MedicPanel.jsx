@@ -2,13 +2,13 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaPencilAlt, FaTrash, FaFileMedicalAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaFileMedicalAlt, FaPencilAlt, FaTrash } from "react-icons/fa";
 import { FaArrowRotateRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
-import Pop from "../components/Pop";
 import Notification from "../components/Notification";
+import Pop from "../components/Pop";
 
 const MedicPanel = () => {
   const nav = useNavigate();
