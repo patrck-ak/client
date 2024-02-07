@@ -5,10 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import MedicPanel from "./routes/MedicPanel";
 import NewPacient from "./routes/NewPacient";
+import NewConsult from "./routes/NewConsult.jsx";
 import AuthUser from "./routes/AuthUser";
 import NewUser from "./routes/NewUser";
 import EditUser from "./routes/EditUser";
 import HomePage from "./routes/HomePage";
+import ErrorHandler from "./routes/ErrorHandler";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
 import EditPacient from "./routes/EditPacient";
@@ -16,6 +18,7 @@ import EditPacient from "./routes/EditPacient";
 const router = createBrowserRouter([
   {
     element: <App />,
+    errorElement: <ErrorHandler />,
     children: [
       {
         path: "/",
@@ -32,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/pacient/new",
         element: <NewPacient />,
+      },
+      {
+        path: "/pacient/new/consult",
+        element: <NewConsult />,
       },
       {
         path: "/pacient/edit/:id",

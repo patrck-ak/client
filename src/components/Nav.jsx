@@ -1,72 +1,57 @@
-import Style from "./css/Nav.module.css";
-import { Link } from "react-router-dom";
-import { FaHome, FaUserCircle, FaUserCog, FaUserPlus } from "react-icons/fa";
+import React from "react";
 import CheckAuth from "./CheckAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaSearch, FaUserInjured, FaUserPlus } from "react-icons/fa";
+import {} from "react-icons/fa6";
+import {} from "react-icons/bs";
+import "./css/nav.css";
 
 function Nav() {
   CheckAuth();
-  var nam;
-
   const nav = useNavigate();
 
-  const storage = sessionStorage.getItem("data");
-  if (storage === undefined || storage === null) {
-    console.log("dados não encontrados.");
-  } else {
-    const data = JSON.parse(storage);
-    if (data.name !== null) {
-      nam = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-    }
-  }
-
-  function LogOut() {
-    sessionStorage.clear();
-    nav("/");
-  }
+  const st = sessionStorage.getItem("data");
+  var data;
+  if (!st) nav("/");
+  else data = JSON.parse(st);
 
   return (
     <>
-      <div className={Style.Wrap}>
-        <ul className={Style.NavList}>
-          <li className={Style.LinkCont}>
-            <Link className={Style.Link} to="/dashboard">
+      <nav
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
+        style={{ position: "absolute", top: 0, left: 0, width: "100vw" }}
+      >
+        <div className="navbar-brand" style={{ paddingLeft: "10px" }}>
+          ConnectMed
+        </div>
+        <span className="navbar-text mt-1">Olá {data.name}</span>
+        <ul
+          className="navbar-nav position-absolute"
+          style={{ right: 30, gap: 25 }}
+        >
+          <li className="nav-item underline">
+            <Link to="/dashboard" className="link">
               <FaHome className="mb-1" /> Dashboard
             </Link>
-            <Link className={Style.Link} to="/pacient/new">
-              <FaUserPlus className="mb-1" /> Novo Paciente
-            </Link>
-            <Link className={Style.Link} to="/user/register">
-              <FaUserCog className="mb-1" /> Novo Usuário
+          </li>
+          <li className="nav-item underline">
+            <Link to="/pacient/new/consult" className="link">
+              <FaUserInjured className="mb-1" /> Nova Consulta
             </Link>
           </li>
-
-          <li className={Style.UserCont}>
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton2"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <FaUserCircle className="mb-1" /> {nam}
-            </button>
-
-            <ul
-              className="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuButton2"
-            >
-              <Link className="dropdown-item" to={"/user/edit/"}>
-                Editar usuário
-              </Link>
-              <hr className="dropdown-divider" />
-              <Link className="dropdown-item" to="#" onClick={LogOut}>
-                Finaliza Sessão
-              </Link>
-            </ul>
+          <li className="nav-item underline">
+            <Link to="/pacient/new" className="link">
+              <FaUserPlus className="mb-1" /> Novo Cadastro
+            </Link>
+          </li>
+          <li className="nav-item underline">
+            <Link to="/pacient/search" className="link">
+              <FaSearch className="mb-1" /> Buscar paciente
+            </Link>
           </li>
         </ul>
-      </div>
+        {/* Saudação */}
+      </nav>
     </>
   );
 }

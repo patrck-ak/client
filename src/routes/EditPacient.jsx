@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 
 function EditPacient() {
-  let { id } = useParams();
+  var { id } = useParams();
 
   const nav = useNavigate();
   const storage = sessionStorage.getItem("data");
@@ -15,8 +15,8 @@ function EditPacient() {
   }
   const dataStorage = JSON.parse(storage);
 
-  const urlBase = "http://localhost:5000";
-  const notFound = [{ data: { name: "Usuário não existe" } }];
+  const urlBase = "https://api-connectmed.onrender.com";
+  const notFound = { data: { name: "Usuário não existe" } };
 
   async function updateReq(e) {
     e.preventDefault();
