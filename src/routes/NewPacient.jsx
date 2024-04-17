@@ -29,11 +29,15 @@ function NewPacient() {
   const [pass, setPass] = useState();
 
   // dados do paciente
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [address, setAddress] = useState("-/-");
-  const [desc, setDesc] = useState("-/-");
-  var [cpf, setCpf] = useState(0);
+
+  const [pacient, setPacient] = useState({
+    name: "",
+    email: "",
+    address: "",
+    desc: "-/-",
+    cpf: 0,
+  });
+
   var urlBase = "https://api-connectmed.onrender.com/pacients/create";
   var res;
 
@@ -60,11 +64,11 @@ function NewPacient() {
     loadBtn();
     axios
       .post(urlBase, {
-        nam: name,
-        email: email,
-        address: address,
-        desc: desc,
-        cpf: cpf,
+        nam: pacient.name,
+        email: pacient.email,
+        address: pacient.address,
+        desc: pacient.desc,
+        cpf: pacient.cpf,
         pass: pass,
         admin: data.name,
         idadmin: data.id,
@@ -99,7 +103,7 @@ function NewPacient() {
             </span>
             <input
               type="text"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setPacient({ ...pacient, name: e.target.value })}
               className="form-control"
               placeholder="Nome do Paciente"
             />
@@ -110,7 +114,9 @@ function NewPacient() {
             </span>
             <input
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) =>
+                setPacient({ ...pacient, email: e.target.value })
+              }
               className="form-control"
               placeholder="Email"
               required
@@ -125,7 +131,7 @@ function NewPacient() {
               mask="___.___.___-__"
               replacement="_"
               type="text"
-              onChange={(e) => setCpf(e.target.value)}
+              onChange={(e) => setPacient({ ...pacient, cpf: e.target.value })}
               className="form-control"
               placeholder="CPF"
             />
@@ -137,10 +143,12 @@ function NewPacient() {
             </span>
             <input
               type="text"
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) =>
+                setPacient({ ...pacient, address: e.target.value })
+              }
               className="form-control"
               placeholder="Endereço"
-              defaultValue={address}
+              defaultValue={pacient.address}
             />
           </div>
           <div className="form-group text-bg-dark mt-3">
@@ -149,8 +157,8 @@ function NewPacient() {
               className="form-control mt-1"
               id="desc"
               rows="6"
-              defaultValue={desc}
-              onChange={(e) => setDesc(e.target.value)}
+              defaultValue={pacient.desc}
+              onChange={(e) => setPacient({ ...pacient, desc: e.target.value })}
             ></textarea>
           </div>
         </div>
@@ -164,7 +172,6 @@ function NewPacient() {
               type="text"
               value={data.name}
               disabled
-              onChange={(e) => setName(e.target.value)}
               className="form-control"
               placeholder="Usuário Médico"
             />
@@ -175,7 +182,7 @@ function NewPacient() {
               <FaLock />
             </span>
             <input
-              type="text"
+              type="password"
               onChange={(e) => setPass(e.target.value)}
               className="form-control"
               placeholder="Senha Médico"

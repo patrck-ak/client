@@ -1,66 +1,68 @@
-import { useState } from "react";
-import axios from "axios";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import Style from "./css/AuthUser.module.css";
 import Notification from "../components/Notification";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { api } from "../api/api";
 
 function AuthUser() {
-  var data;
   const navigate = useNavigate();
-  const urlBase = "https://api-connectmed.onrender.com/auth/user";
-  const storage = sessionStorage.getItem("data");
-  if (!storage) {
-    console.log("nenhum dado encontrado...");
-  } else {
-    data = JSON.parse(storage);
-    if (data.status) {
-      console.log("valido");
-      navigate("/dashboard");
+
+  // verificação de sessão
+  useEffect(() => {
+    var data;
+    const storage = sessionStorage.getItem("data");
+    if (!storage) {
+      console.log("nenhum dado encontrado...");
+    } else {
+      data = JSON.parse(storage);
+      if (data.status) {
+        console.log("valido");
+        navigate("/dashboard");
+      }
     }
-  }
+  }, []);
 
-  var [msg, setMsg] = useState(" ");
-  var [type, setType] = useState(" ");
-  var [load, setLoad] = useState(true);
-  const [nameInput, setName] = useState();
-  const [passInput, setPass] = useState();
-  var res;
+  const [msg, setMsg] = useState(" ");
+  const [type, setType] = useState(" ");
+  const [load, setLoad] = useState(true);
+  const [user, setUser] = useState({
+    userid: "",
+    password: "",
+  });
 
-  function loadBtn() {
+  const loadBtn = () => {
     setLoad(false);
     setTimeout(() => {
       setLoad(true);
     }, 1200);
-  }
+  };
 
-  function defNotif(msgres, type) {
+  const defNotif = (msgres, type) => {
     setMsg(msgres);
     setType(type);
     setTimeout(() => {
       setMsg(" ");
       setType(" ");
     }, 1200);
-  }
+  };
 
   const authUser = (e) => {
-    e.preventDefault(); // cancela o envio padrão
+    e.preventDefault();
     loadBtn();
-
-    //* tenta enviar um post pelo axios
+    //* request na api
     try {
-      axios
-        .post(urlBase, { name: nameInput, pass: passInput })
+      api
+        .post("auth/user", { name: user.userid, pass: user.password })
         .then((response) => {
-          res = response.data;
-
+          let res = response.data;
           //* verifica se foi logado
           switch (res.status) {
             case 5:
               defNotif(res.msg, res.type);
               break;
-
             case 10:
               //* recupera dados da api e salva no sessionStorage do navegador.
               const data = {
@@ -70,14 +72,8 @@ function AuthUser() {
                 status: res.auth,
               };
 
-              const stg = JSON.stringify(data);
-              sessionStorage.setItem("data", stg);
-
-              console.log(data);
-              console.log(stg);
-              console.log(
-                `usuário ${res.name} logado \n token: ${res.token} \nUserID: ${res.id}`
-              );
+              const s = JSON.stringify(data);
+              sessionStorage.setItem("data", s);
               //* redireciona para home do app
               navigate("/dashboard");
               break;
@@ -87,7 +83,7 @@ function AuthUser() {
           }
         })
         .catch((err) => {
-          //! envia um post de log de erro
+          //TODO sistema de log (ip, geolocation e horario.)
           console.log(err);
         });
     } catch (err) {
@@ -122,7 +118,7 @@ function AuthUser() {
             </span>
             <input
               type="text"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setUser({ ...user, userid: e.target.value })}
               className="form-control"
               name="userID"
               placeholder="ID"
@@ -137,7 +133,7 @@ function AuthUser() {
             </span>
             <input
               type="password"
-              onChange={(e) => setPass(e.target.value)}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
               className="form-control"
               name="pass"
               placeholder="Senha"

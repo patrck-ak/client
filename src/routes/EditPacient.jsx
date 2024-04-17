@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { FaArrowLeft, FaUser } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Nav from "../components/Nav";
+import { api } from "../api/api";
 
 function EditPacient() {
   var { id } = useParams();
@@ -20,8 +21,8 @@ function EditPacient() {
 
   async function updateReq(e) {
     e.preventDefault();
-    axios
-      .patch(`${urlBase}/update/pacient`, {
+    api
+      .patch(`/update/pacient`, {
         name: uName,
         desc: uDesc,
         email: uMail,
