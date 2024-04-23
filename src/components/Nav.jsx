@@ -1,7 +1,7 @@
 import React from "react";
 import CheckAuth from "./CheckAuth";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaSearch, FaUserInjured, FaUserPlus } from "react-icons/fa";
+import { FaCog, FaHome, FaUserInjured, FaUserPlus } from "react-icons/fa";
 import {} from "react-icons/fa6";
 import {} from "react-icons/bs";
 import "./css/nav.css";
@@ -45,8 +45,8 @@ function Nav() {
             </Link>
           </li>
           <li className="nav-item underline">
-            <Link to="/pacient/search" className="link">
-              <FaSearch className="mb-1" /> Buscar paciente
+            <Link to="/config" className="link">
+              <FaCog className="mb-1" /> Configurações
             </Link>
           </li>
         </ul>

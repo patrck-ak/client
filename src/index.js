@@ -14,6 +14,7 @@ import ErrorHandler from "./routes/ErrorHandler";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
 import EditPacient from "./routes/EditPacient";
+import ConfigPage from "./routes/ConfigPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/user/edit/",
         element: <EditUser />,
+      },
+      {
+        path: "/config",
+        element: <ConfigPage />,
       },
     ],
   },

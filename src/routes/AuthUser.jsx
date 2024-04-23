@@ -5,7 +5,7 @@ import Notification from "../components/Notification";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { api } from "../api/api";
+import axios from "axios";
 
 function AuthUser() {
   const navigate = useNavigate();
@@ -54,8 +54,11 @@ function AuthUser() {
     loadBtn();
     //* request na api
     try {
-      api
-        .post("auth/user", { name: user.userid, pass: user.password })
+      axios
+        .post("https://api-connectmed.onrender.com/auth/user", {
+          name: user.userid,
+          pass: user.password,
+        })
         .then((response) => {
           let res = response.data;
           //* verifica se foi logado

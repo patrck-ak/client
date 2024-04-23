@@ -13,7 +13,7 @@ function HomePage() {
   const nav = useNavigate();
   const urlBase = "https://api-connectmed.onrender.com";
 
-  var res;
+  var [res, setRes] = useState();
   var [cpf, setCpf] = useState();
   var [msg, setMsg] = useState(" ");
   var [type, setType] = useState(" ");
@@ -49,7 +49,7 @@ function HomePage() {
         cpf: cpf,
       })
       .then((response) => {
-        res = response.data;
+        setRes(response.data);
         switch (res.status) {
           case 5:
             defNotif(res.msg, res.type);
@@ -95,6 +95,15 @@ function HomePage() {
               <FaMagnifyingGlass />
             </button>
           </div>
+          {!res ? (
+            <></>
+          ) : (
+            <div
+              style={{ position: "absolute", top: 50, border: "5px solid red" }}
+            >
+              {"TODO: visualização de prontuários"}
+            </div>
+          )}
         </form>
       </div>
     </>
